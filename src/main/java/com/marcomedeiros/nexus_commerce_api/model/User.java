@@ -1,5 +1,6 @@
 package com.marcomedeiros.nexus_commerce_api.model;
 
+import com.marcomedeiros.nexus_commerce_api.model.enums.TypePerson;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -46,4 +47,7 @@ public class User implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_role")
     private Role role;
+
+    @Column(name = "type_person", nullable = false)
+    private TypePerson typePerson;
 }

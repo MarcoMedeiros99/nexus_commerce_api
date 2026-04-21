@@ -3,7 +3,7 @@ package com.marcomedeiros.nexus_commerce_api.model.sales;
 import com.marcomedeiros.nexus_commerce_api.model.access.Address;
 import com.marcomedeiros.nexus_commerce_api.model.access.User;
 import com.marcomedeiros.nexus_commerce_api.model.sales.enums.OrderStatus;
-import com.marcomedeiros.nexus_commerce_api.model.sales.enums.OrderStatusConverter;
+import com.marcomedeiros.nexus_commerce_api.model.sales.enums.converters.OrderStatusConverter;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,6 +11,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -52,9 +53,8 @@ public class Order implements Serializable {
     @JoinColumn(name = "id_coupon")
     private Coupon coupon;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_payment")
-    private Payment payment;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<Payment> payments;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_address")

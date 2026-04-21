@@ -34,6 +34,7 @@ public class Category implements Serializable {
     @Column(name = "access_code", nullable = false, unique = true, updatable = false, length = 15)
     private String accessCode;
 
+    @Builder.Default
     @ManyToMany(mappedBy = "categories") // mappedBy indica que quem "manda" na relação é a classe Product
     private Set<Product> products = new HashSet<>();
 

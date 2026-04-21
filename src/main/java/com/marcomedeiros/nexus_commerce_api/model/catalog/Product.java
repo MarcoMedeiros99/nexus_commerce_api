@@ -60,6 +60,10 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private Double height; // Altura
 
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    private Stock stock;
+
+    @Builder.Default
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "tb_product_category",

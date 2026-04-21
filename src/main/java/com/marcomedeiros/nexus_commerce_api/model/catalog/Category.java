@@ -6,6 +6,8 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -31,6 +33,9 @@ public class Category implements Serializable {
 
     @Column(name = "access_code", nullable = false, unique = true, updatable = false, length = 15)
     private String accessCode;
+
+    @ManyToMany(mappedBy = "categories") // mappedBy indica que quem "manda" na relação é a classe Product
+    private Set<Product> products = new HashSet<>();
 
     @PrePersist
     private void generateAccessCode(){

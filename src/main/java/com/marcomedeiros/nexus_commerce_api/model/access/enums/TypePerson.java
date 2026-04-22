@@ -6,10 +6,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum TypePerson {
-    INDIVIDUAL(1),
-    CORPORATE(2);
+    INDIVIDUAL(1, "Pessoa Física"),
+    CORPORATE(2, "Pessoa Jurídica");
 
-    private int code;
+    private Integer code;
+    private String description;
 
     public static TypePerson valueOf(int code){
         for (TypePerson value : TypePerson.values()){

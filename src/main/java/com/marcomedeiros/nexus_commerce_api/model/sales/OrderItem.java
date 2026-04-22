@@ -34,7 +34,7 @@ public class OrderItem implements Serializable {
     private Integer quantity;
 
     @Column(nullable = false)
-    private BigDecimal price;
+    private BigDecimal unitPrice;
 
     public void setProduct(Product product) {
         id.setProduct(product);

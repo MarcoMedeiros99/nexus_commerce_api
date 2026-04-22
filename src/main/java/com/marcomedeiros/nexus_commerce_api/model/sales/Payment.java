@@ -32,7 +32,7 @@ public class Payment implements Serializable{
     private String accessCode;
 
     @Convert(converter = PaymentMethodConverter.class)
-    @Column(nullable = false)
+    @Column(name = "payment_method", nullable = false)
     private PaymentMethod paymentMethod;
 
     @Column(nullable = false)

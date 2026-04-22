@@ -76,8 +76,6 @@ public class Order implements Serializable {
         }
         if (this.orderStatus == null) {
             this.orderStatus = OrderStatus.WAITING_PAYMENT;
-
-
         }
     }
 }

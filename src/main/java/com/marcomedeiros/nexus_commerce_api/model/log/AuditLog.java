@@ -36,9 +36,6 @@ public class AuditLog {
     @Column(name = "ip_address", length = 45)
     private String ipAddress;
 
-    @Column(name = "action_type", nullable = false)
-    private ActionType actionType;
-
     @PrePersist
     protected void onCreate() {
         this.dateTime = LocalDateTime.now();

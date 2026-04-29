@@ -47,15 +47,20 @@ public class Payment implements Serializable{
 
     @PrePersist
     private void generateAccessCode() {
+        // Garante o código de acesso único
         if (this.accessCode == null) {
             String randomHash = UUID.randomUUID().toString().substring(0, 6).toUpperCase();
             this.accessCode = "#PAY-" + randomHash;
         }
-        if (this.paymentMethod == null) {
-            this.paymentMethod = PaymentMethod.CREDIT_CARD;
-        }
-        if (this.paymentDateTime == null){
+
+        // Garante a data e hora do pagamento
+        if (this.paymentDateTime == null) {
             this.paymentDateTime = LocalDateTime.now();
+        }
+
+        // Garante um método de pagamento padrão se estiver nulo
+        if (this.paymentMethod == null) {
+            this.paymentMethod = PaymentMethod.NOT_INFORMED;
         }
     }
 

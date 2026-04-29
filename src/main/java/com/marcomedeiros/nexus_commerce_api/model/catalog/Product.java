@@ -44,21 +44,8 @@ public class Product implements Serializable {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @PositiveOrZero
-    @Column(nullable = false)
-    private Double weight; //kg
-
-    @PositiveOrZero
-    @Column(nullable = false)
-    private Double length; // Comprimento
-
-    @PositiveOrZero
-    @Column(nullable = false)
-    private Double width; // Largura
-
-    @PositiveOrZero
-    @Column(nullable = false)
-    private Double height; // Altura
+    @Embedded
+    private DimensionsProduct dimensionsProduct;
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     private Stock stock;

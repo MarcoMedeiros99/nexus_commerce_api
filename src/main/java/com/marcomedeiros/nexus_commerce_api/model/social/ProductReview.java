@@ -42,6 +42,7 @@ public class ProductReview {
     @JoinColumn(name = "id_product", nullable = false)
     private Product product;
 
+    @Builder.Default
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewPhoto> photos = new ArrayList<>();
 

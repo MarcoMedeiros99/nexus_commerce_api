@@ -10,10 +10,7 @@ import lombok.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 
 @Entity
@@ -53,15 +50,16 @@ public class Order implements Serializable {
     @JoinColumn(name = "id_coupon")
     private Coupon coupon;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<Payment> payments;
+    @Builder.Default
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Payment> payments = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_address")
     private Address address;
 
     @Builder.Default
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "id.order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderItem> items = new HashSet<>();
 
     @Convert(converter = OrderStatusConverter.class)
@@ -75,7 +73,7 @@ public class Order implements Serializable {
             this.accessCode = "#ORD-" + randomHash;
         }
         if (this.orderStatus == null) {
-            this.orderStatus = OrderStatus.WAITING_PAYMENT;
+            this.orderStatus = OrderStatus.NOT_INFORMED;
         }
     }
 }

@@ -3,7 +3,6 @@ package com.marcomedeiros.nexus_commerce_api.model.sales;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.xml.crypto.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;

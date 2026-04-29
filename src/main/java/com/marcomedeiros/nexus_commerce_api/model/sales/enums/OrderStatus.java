@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum OrderStatus {
+    NOT_INFORMED(0, "Não Informado"),
     WAITING_PAYMENT(1, "Aguardando Pagamento"),
     PAID(2, "Pago"),
     SHIPPED(3, "Enviado"),

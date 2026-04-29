@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum PaymentMethod {
+    NOT_INFORMED(0, "Não Informado"),
     CREDIT_CARD(1, "Cartão de Crédito"),
     DEBIT_CARD(2, "Cartão de Débito"),
     PIX(3, "PIX"),

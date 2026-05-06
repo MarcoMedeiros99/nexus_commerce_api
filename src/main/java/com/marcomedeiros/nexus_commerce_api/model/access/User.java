@@ -45,6 +45,7 @@ public class User implements Serializable {
     @Column(nullable = false, length = 254)
     private String password;
 
+    @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
 

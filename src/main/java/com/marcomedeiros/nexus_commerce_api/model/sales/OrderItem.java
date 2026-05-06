@@ -25,6 +25,7 @@ public class OrderItem implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    @Builder.Default
     @EmbeddedId // fala que o ID é classe composta OrderItemPK
     @EqualsAndHashCode.Include
     private OrderItemPK id = new OrderItemPK();

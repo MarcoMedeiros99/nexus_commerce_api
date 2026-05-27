@@ -34,7 +34,7 @@ public class User implements Serializable {
     private String name;
 
     @Column(nullable = false, unique = true, length = 18)
-    private String cpfCnpj;
+    private String document;
 
     @Column(nullable = false)
     private String phone;

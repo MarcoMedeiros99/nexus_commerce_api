@@ -5,7 +5,7 @@ import jakarta.validation.Payload;
 
 import java.lang.annotation.*;
 
-@Target(ElementType.TYPE) // Indica que a anotação vai em cima da CLASSE (ou Record)
+@Target(ElementType.TYPE) 
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = CpfOrCnpjValidator.class) // Aponta para a classe que fará a lógica
 @Documented

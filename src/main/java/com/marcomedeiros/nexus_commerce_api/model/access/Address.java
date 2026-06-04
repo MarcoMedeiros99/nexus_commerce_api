@@ -43,9 +43,14 @@ public class Address implements Serializable {
     @Column(nullable = false)
     private String state;
 
+    @NotBlank
+    String neighborhood;
+
     @Pattern(regexp = "\\d{5}-\\d{3}")
     @Column(nullable = false)
     private String zipCode; // CEP
+
+    private String complement;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user") // FK

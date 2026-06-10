@@ -67,7 +67,7 @@ public class TestConfig implements CommandLineRunner {
                 .name("Majin Kodak")
                 .email("majinkodak@test.com")
                 .password("321741369")
-                .cpfCnpj("123.321.456-25")
+                .document("123.321.456-25")
                 .phone("31 9 9999-9999")
                 .role(r1)
                 .typePerson(TypePerson.CORPORATE)
@@ -76,6 +76,7 @@ public class TestConfig implements CommandLineRunner {
         Address ad1 = Address.builder()
                 .streetAddress("bequin do mangueiras").number("420")
                 .city("Belo horizonte").state("MG").zipCode("30670-420")
+                .neighborhood("mangueiras")
                 .user(u1)
                 .build();
 
@@ -85,7 +86,7 @@ public class TestConfig implements CommandLineRunner {
                 .name("Lil Top")
                 .email("liltop@test.com")
                 .password("985632589")
-                .cpfCnpj("653.485.456-25")
+                .document("653.485.456-25")
                 .phone("31 9 9999-9999")
                 .role(r2)
                 .typePerson(TypePerson.INDIVIDUAL)
@@ -94,6 +95,7 @@ public class TestConfig implements CommandLineRunner {
         Address ad2 = Address.builder()
                 .streetAddress("predinho do c1").number("480")
                 .city("Belo horizonte").state("MG").zipCode("30789-420")
+                .neighborhood("C1")
                 .user(u2)
                 .build();
 

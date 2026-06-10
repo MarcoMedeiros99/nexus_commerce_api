@@ -13,12 +13,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     // Essencial para validar se o CPF ou CNPJ já está cadastrado
-    Optional<User> findByCpfCnpj(String cpfCnpj);
+    Optional<User> findByDocument(String document);
 
     // Essencial para buscar o usuário pelo código externo (#USR-XXXXXX)
     Optional<User> findByAccessCode(String accessCode);
 
     // Útil para verificar existência rapidamente sem carregar o objeto todo
     boolean existsByEmail(String email);
-    boolean existsByCpfCnpj(String cpfCnpj);
+    boolean existsByDocument(String document);
 }

@@ -1,7 +1,6 @@
 package com.marcomedeiros.nexus_commerce_api.model.catalog;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
@@ -27,7 +26,7 @@ public class Stock implements Serializable {
 
     @PositiveOrZero
     @Column(nullable = false)
-    private int  itemQuantity;
+    private int itemQuantity;
 
     @PositiveOrZero
     @Column(nullable = false)

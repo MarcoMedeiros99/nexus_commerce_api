@@ -16,7 +16,6 @@ import com.marcomedeiros.nexus_commerce_api.repository.access.UserRepository;
 import com.marcomedeiros.nexus_commerce_api.repository.catalog.CategoryRepository;
 import com.marcomedeiros.nexus_commerce_api.repository.catalog.ProductRepository;
 import com.marcomedeiros.nexus_commerce_api.repository.catalog.StockRepository;
-import com.marcomedeiros.nexus_commerce_api.repository.sales.OrderItemRepository;
 import com.marcomedeiros.nexus_commerce_api.repository.sales.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -48,8 +47,6 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
-    @Autowired
-    private OrderItemRepository orderItemRepository;
 
 
     @Override

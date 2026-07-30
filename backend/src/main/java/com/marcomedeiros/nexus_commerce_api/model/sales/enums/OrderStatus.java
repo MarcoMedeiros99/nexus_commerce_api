@@ -3,7 +3,9 @@ package com.marcomedeiros.nexus_commerce_api.model.sales.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+// Cria automaticamente os métodos get() para todos os atributos (Lombok).
 @Getter
+// Cria um construtor com todos os atributos da classe.
 @AllArgsConstructor
 public enum OrderStatus {
     NOT_INFORMED(0, "Não Informado"),

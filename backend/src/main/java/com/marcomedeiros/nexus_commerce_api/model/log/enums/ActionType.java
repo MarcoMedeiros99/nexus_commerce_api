@@ -3,7 +3,9 @@ package com.marcomedeiros.nexus_commerce_api.model.log.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+// Cria automaticamente os métodos get() para todos os atributos (Lombok).
 @Getter
+// Cria um construtor com todos os atributos da classe.
 @AllArgsConstructor
 public enum ActionType {
     CREATE_PRODUTO(1, "Produto Criado"),

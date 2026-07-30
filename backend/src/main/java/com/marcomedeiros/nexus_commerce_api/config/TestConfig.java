@@ -157,7 +157,7 @@ public class TestConfig implements CommandLineRunner {
         // 6. Pedido e Itens
 
         Order ord1 = Order.builder()
-                .user(u1).address(ad1)
+                .user(u1).deliveryAddress(new com.marcomedeiros.nexus_commerce_api.model.sales.DeliveryAddress(ad1.getStreetAddress(), ad1.getNumber(), ad1.getCity(), ad1.getState(), ad1.getNeighborhood(), ad1.getZipCode(), ad1.getComplement()))
                 .totalValue(new BigDecimal("2000.00"))
                 .finalValue(new BigDecimal("2000.00"))
                 .freightValue(BigDecimal.ZERO)

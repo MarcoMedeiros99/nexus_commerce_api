@@ -17,7 +17,7 @@ public record OrderResponseDTO(
         OrderStatus orderStatus,
         Long idUser,
         CouponResponseDTO coupon,
-        Long idAddress,
+        com.marcomedeiros.nexus_commerce_api.model.sales.DeliveryAddress deliveryAddress,
         Set<OrderItemResponseDTO> items,
         PaymentResponseDTO lastPayment) {
 
@@ -31,7 +31,7 @@ public record OrderResponseDTO(
                 order.getOrderStatus(),
                 order.getUser() != null ? order.getUser().getIdUser() : null,
                 order.getCoupon() != null ? new CouponResponseDTO(order.getCoupon()) : null,
-                order.getAddress() != null ? order.getAddress().getIdAddress() : null,
+                order.getDeliveryAddress(),
                 order.getItems().stream()
                         .map(OrderItemResponseDTO::new)
                         .collect(Collectors.toSet()),

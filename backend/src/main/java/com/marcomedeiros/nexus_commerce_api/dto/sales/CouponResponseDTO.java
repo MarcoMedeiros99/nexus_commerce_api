@@ -8,7 +8,8 @@ public record CouponResponseDTO(
 
         Long idCoupon,
         String nameCode,
-        Integer discountPercentage,
+        com.marcomedeiros.nexus_commerce_api.model.sales.enums.DiscountType discountType,
+        java.math.BigDecimal discountValue,
         LocalDateTime expiryDate,
         Boolean active) {
 
@@ -16,7 +17,8 @@ public record CouponResponseDTO(
         this(
                 coupon.getIdCoupon(),
                 coupon.getNameCode(),
-                coupon.getDiscountPercentage(),
+                coupon.getDiscountType(),
+                coupon.getDiscountValue(),
                 coupon.getExpiryDate(),
                 coupon.getActive());
     }

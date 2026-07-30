@@ -31,9 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-/src/main/java/com/marcomedeiros/nexus_commerce_api/config/SecurityConfig.java
-/.gitattributes
-
-/pom.xml
-/mvnw.cmd
-/mvnw

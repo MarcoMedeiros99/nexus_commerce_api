@@ -1,4 +1,4 @@
-package com.marcomedeiros.nexus_commerce_api.dto.access;
+﻿package com.marcomedeiros.nexus_commerce_api.dto.access;
 
 import com.marcomedeiros.nexus_commerce_api.model.access.User;
 import com.marcomedeiros.nexus_commerce_api.model.access.enums.TypePerson;

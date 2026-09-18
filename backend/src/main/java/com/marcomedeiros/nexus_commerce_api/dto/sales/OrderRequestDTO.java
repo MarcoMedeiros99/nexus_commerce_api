@@ -1,4 +1,4 @@
-package com.marcomedeiros.nexus_commerce_api.dto.sales;
+﻿package com.marcomedeiros.nexus_commerce_api.dto.sales;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -9,15 +9,15 @@ import java.util.Set;
 
 public record OrderRequestDTO(
 
-        @NotNull(message = "O valor do frete é obrigatório")
+        @NotNull(message = "O valor do frete Ã© obrigatÃ³rio")
         BigDecimal freightValue,
 
-        @NotNull(message = "O ID do usuário é obrigatório")
+        @NotNull(message = "O ID do usuÃ¡rio Ã© obrigatÃ³rio")
         Long idUser,
 
         Long idCoupon,
 
-        @NotNull(message = "O ID do endereço de entrega é obrigatório")
+        @NotNull(message = "O ID do endereÃ§o de entrega Ã© obrigatÃ³rio")
         Long idAddress,
 
         @NotNull(message = "O pedido deve ter ao menos um item")

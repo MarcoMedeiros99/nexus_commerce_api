@@ -1,20 +1,17 @@
-package com.marcomedeiros.nexus_commerce_api.model.sales.enums;
+﻿package com.marcomedeiros.nexus_commerce_api.model.sales.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-// Cria automaticamente os métodos get() para todos os atributos (Lombok).
 @Getter
-// Cria um construtor com todos os atributos da classe.
 @AllArgsConstructor
 public enum PaymentMethod {
-    NOT_INFORMED(0, "Não Informado"),
-    CREDIT_CARD(1, "Cartão de Crédito"),
-    DEBIT_CARD(2, "Cartão de Débito"),
+    NOT_INFORMED(0, "NÃ£o Informado"),
+    CREDIT_CARD(1, "CartÃ£o de CrÃ©dito"),
+    DEBIT_CARD(2, "CartÃ£o de DÃ©bito"),
     PIX(3, "PIX"),
     BOLETO(4, "Boleto"),
-    BANK_TRANSFER(5, "Transferência Bancária"),
-    CASH(6, "Dinheiro em Espécie");
+    BANK_TRANSFER(5, "TransferÃªncia BancÃ¡ria"),
+    CASH(6, "Dinheiro em EspÃ©cie");
 
     private final Integer code;
     private final String description;

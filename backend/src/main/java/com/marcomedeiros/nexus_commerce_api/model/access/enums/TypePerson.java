@@ -1,15 +1,12 @@
-package com.marcomedeiros.nexus_commerce_api.model.access.enums;
+﻿package com.marcomedeiros.nexus_commerce_api.model.access.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-// Cria automaticamente os métodos get() para todos os atributos (Lombok).
 @Getter
-// Cria um construtor com todos os atributos da classe.
 @AllArgsConstructor
 public enum TypePerson {
-    INDIVIDUAL(1, "Pessoa Física"),
-    CORPORATE(2, "Pessoa Jurídica");
+    INDIVIDUAL(1, "Pessoa FÃ­sica"),
+    CORPORATE(2, "Pessoa JurÃ­dica");
 
     private Integer code;
     private String description;

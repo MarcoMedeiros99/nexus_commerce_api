@@ -1,4 +1,4 @@
-package com.marcomedeiros.nexus_commerce_api.repository.sales;
+﻿package com.marcomedeiros.nexus_commerce_api.repository.sales;
 
 import com.marcomedeiros.nexus_commerce_api.model.sales.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;

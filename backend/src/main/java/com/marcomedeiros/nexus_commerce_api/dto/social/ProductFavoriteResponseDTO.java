@@ -1,4 +1,4 @@
-package com.marcomedeiros.nexus_commerce_api.dto.social;
+﻿package com.marcomedeiros.nexus_commerce_api.dto.social;
 
 import java.time.LocalDateTime;
 

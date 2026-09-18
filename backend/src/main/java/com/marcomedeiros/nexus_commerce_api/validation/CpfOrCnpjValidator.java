@@ -1,4 +1,4 @@
-package com.marcomedeiros.nexus_commerce_api.validation;
+﻿package com.marcomedeiros.nexus_commerce_api.validation;
 
 import com.marcomedeiros.nexus_commerce_api.dto.access.UserRequestDTO;
 import com.marcomedeiros.nexus_commerce_api.model.access.enums.TypePerson;
@@ -27,8 +27,6 @@ public class CpfOrCnpjValidator implements ConstraintValidator<CpfOrCnpj, UserRe
             cnpjValidator.initialize(null);
             isValid = cnpjValidator.isValid(dto.document(), context);
         }
-
-        // Se for inválido, direciona a mensagem de erro especificamente para o campo "document"
         if (!isValid) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())

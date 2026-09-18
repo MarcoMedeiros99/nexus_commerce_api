@@ -1,21 +1,18 @@
-package com.marcomedeiros.nexus_commerce_api.model.log.enums;
+﻿package com.marcomedeiros.nexus_commerce_api.model.log.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-// Cria automaticamente os métodos get() para todos os atributos (Lombok).
 @Getter
-// Cria um construtor com todos os atributos da classe.
 @AllArgsConstructor
 public enum ActionType {
     CREATE_PRODUTO(1, "Produto Criado"),
     DELETE_PEDIDO(2, "Pedido Removido"),
     UPDATE_PRODUTO(3, "Produto Atualizado"),
-    PRODUTO_PRECO_ALTERADO(4, "Preço do Produto Alterado"),
+    PRODUTO_PRECO_ALTERADO(4, "PreÃ§o do Produto Alterado"),
     ESTOQUE_AJUSTE_MANUAL(5, "Ajuste Manual de Estoque"),
     LOGIN_SUCESSO(6, "Login com Sucesso"),
     LOGIN_FALHA(7, "Falha no Login"),
-    USUARIO_BLOQUEADO(8, "Usuário Bloqueado"),
+    USUARIO_BLOQUEADO(8, "UsuÃ¡rio Bloqueado"),
     PEDIDO_CRIADO(9, "Pedido Criado"),
     PEDIDO_STATUS_ALTERADO(10, "Status do Pedido Alterado"),
     CUPOM_APLICADO(11, "Cupom Aplicado"),
@@ -23,7 +20,7 @@ public enum ActionType {
     CARGO_ALTERADO(13, "Cargo Alterado"),
     LOGS_LIMPEZA(14, "Limpeza de Logs"),
     PASSWORD_CHANGED(15, "Senha Alterada"),
-    UNAUTHORIZED_ACCESS(16, "Tentativa de Acesso Não Autorizado"),
+    UNAUTHORIZED_ACCESS(16, "Tentativa de Acesso NÃ£o Autorizado"),
     COUPON_CREATED(17, "Cupom Criado"),
     LOGOUT(18, "Logout Realizado"),
     ORDER_REFUNDED(19, "Pedido Reembolsado");
@@ -38,6 +35,6 @@ public enum ActionType {
                 return value;
             }
         }
-        throw new IllegalArgumentException("Código de ação inválido: " + code);
+        throw new IllegalArgumentException("CÃ³digo de aÃ§Ã£o invÃ¡lido: " + code);
     }
 }

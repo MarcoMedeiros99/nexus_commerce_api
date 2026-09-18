@@ -1,4 +1,4 @@
-package com.marcomedeiros.nexus_commerce_api.dto.log;
+﻿package com.marcomedeiros.nexus_commerce_api.dto.log;
 
 import com.marcomedeiros.nexus_commerce_api.model.log.AuditLog;
 import com.marcomedeiros.nexus_commerce_api.model.log.enums.ActionType;

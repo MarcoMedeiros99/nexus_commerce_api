@@ -1,4 +1,4 @@
-package com.marcomedeiros.nexus_commerce_api.config;
+﻿package com.marcomedeiros.nexus_commerce_api.config;
 
 import com.marcomedeiros.nexus_commerce_api.model.access.Address;
 import com.marcomedeiros.nexus_commerce_api.model.access.Role;
@@ -52,13 +52,9 @@ public class TestConfig implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        // 1. Role
-
         Role r1 = Role.builder().nameRole("ADMIN").build();
         Role r2 = Role.builder().nameRole("CLIENT").build();
         roleRepository.saveAll(Arrays.asList(r1, r2));
-
-        // 2. User
 
         User u1 = User.builder()
                 .name("Majin Kodak")
@@ -99,9 +95,6 @@ public class TestConfig implements CommandLineRunner {
         u2.getAddresses().add(ad2);
         userRepository.saveAll(Arrays.asList(u1, u2));
 
-
-        // 3. Category
-
         Category celular = Category.builder()
                 .name("Celular")
                 .build();
@@ -112,8 +105,6 @@ public class TestConfig implements CommandLineRunner {
 
         categoryRepository.saveAll(Arrays.asList(celular, eletronicos));
 
-        // 4. Product
-
         Product prod1 = Product.builder()
                 .name("Iphone 10")
                 .description("Celular da ipple")
@@ -123,9 +114,9 @@ public class TestConfig implements CommandLineRunner {
 
         Product prod2 = Product.builder()
                 .name("Smart TV 65\" TCL 4K")
-                .description("A Smart TV TCL 65P7K de 65\" oferece uma experiência visual. " +
-                        "Ela combina tecnologia com recursos, elevando o entretenimento doméstico. " +
-                        "Com a resolução 4K UHD")
+                .description("A Smart TV TCL 65P7K de 65\" oferece uma experiÃªncia visual. " +
+                        "Ela combina tecnologia com recursos, elevando o entretenimento domÃ©stico. " +
+                        "Com a resoluÃ§Ã£o 4K UHD")
                 .price(new java.math.BigDecimal("2300.00"))
                 .dimensionsProduct(new DimensionsProduct(21.2, 144.5, 14.3, 89.3))
                 .build();
@@ -135,8 +126,6 @@ public class TestConfig implements CommandLineRunner {
         prod2.getCategories().add(eletronicos);
 
         productRepository.saveAll(Arrays.asList(prod1, prod2));
-
-        // 5. Stock
 
         Stock stock1 = Stock.builder()
                 .product(prod1)
@@ -153,8 +142,6 @@ public class TestConfig implements CommandLineRunner {
                 .build();
 
         stockRepository.saveAll(Arrays.asList(stock1, stock2));
-
-        // 6. Pedido e Itens
 
         Order ord1 = Order.builder()
                 .user(u1).deliveryAddress(new com.marcomedeiros.nexus_commerce_api.model.sales.DeliveryAddress(ad1.getStreetAddress(), ad1.getNumber(), ad1.getCity(), ad1.getState(), ad1.getNeighborhood(), ad1.getZipCode(), ad1.getComplement()))

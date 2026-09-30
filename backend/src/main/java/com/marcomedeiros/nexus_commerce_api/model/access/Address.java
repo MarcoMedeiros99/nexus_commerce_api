@@ -1,6 +1,7 @@
-﻿package com.marcomedeiros.nexus_commerce_api.model.access;
+package com.marcomedeiros.nexus_commerce_api.model.access;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -43,6 +44,7 @@ public class Address implements Serializable {
     private String zipCode; // CEP
 
     private String complement;
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user") // FK
     private User user;

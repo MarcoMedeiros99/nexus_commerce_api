@@ -29,139 +29,149 @@ import java.util.Arrays;
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
 
-    @Autowired
-    private RoleRepository roleRepository;
+        @Autowired
+        private RoleRepository roleRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+        @Autowired
+        private UserRepository userRepository;
 
-    @Autowired
-    private ProductRepository productRepository;
+        @Autowired
+        private ProductRepository productRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+        @Autowired
+        private CategoryRepository categoryRepository;
 
-    @Autowired
-    private StockRepository stockRepository;
+        @Autowired
+        private StockRepository stockRepository;
 
-    @Autowired
-    private OrderRepository orderRepository;
+        @Autowired
+        private OrderRepository orderRepository;
 
+        @Override
+        public void run(String... args) throws Exception {
 
+                Role r1 = Role.builder().nameRole("ADMIN").build();
+                Role r2 = Role.builder().nameRole("CLIENT").build();
+                roleRepository.saveAll(Arrays.asList(r1, r2));
 
-    @Override
-    public void run(String... args) throws Exception {
+                User u1 = User.builder()
+                                .name("Majin Kodak")
+                                .email("majinkodak@test.com")
+                                .password("321741369")
+                                .document("123.321.456-25")
+                                .phone("31 9 9999-9999")
+                                .role(r1)
+                                .typePerson(TypePerson.CORPORATE)
+                                .build();
 
-        Role r1 = Role.builder().nameRole("ADMIN").build();
-        Role r2 = Role.builder().nameRole("CLIENT").build();
-        roleRepository.saveAll(Arrays.asList(r1, r2));
+                Address ad1 = Address.builder()
+                                .streetAddress("Virgilio Salomão").number("49")
+                                .city("Belo horizonte").state("MG").zipCode("30670-250")
+                                .neighborhood("Vila Pinho")
+                                .user(u1)
+                                .build();
 
-        User u1 = User.builder()
-                .name("Majin Kodak")
-                .email("majinkodak@test.com")
-                .password("321741369")
-                .document("123.321.456-25")
-                .phone("31 9 9999-9999")
-                .role(r1)
-                .typePerson(TypePerson.CORPORATE)
-                .build();
+                Address ad2 = Address.builder()
+                                .streetAddress("Terezinha viana de assis").number("79")
+                                .city("Belo horizonte").state("MG").zipCode("30670-240")
+                                .neighborhood("Vila Pinho")
+                                .user(u1)
+                                .build();
 
-        Address ad1 = Address.builder()
-                .streetAddress("bequin do mangueiras").number("420")
-                .city("Belo horizonte").state("MG").zipCode("30670-420")
-                .neighborhood("mangueiras")
-                .user(u1)
-                .build();
+                u1.getAddresses().add(ad1);
+                u1.getAddresses().add(ad2);
 
-        u1.getAddresses().add(ad1);
+                User u2 = User.builder()
+                                .name("Lil Top")
+                                .email("liltop@test.com")
+                                .password("985632589")
+                                .document("653.485.456-25")
+                                .phone("31 9 9999-9999")
+                                .role(r2)
+                                .typePerson(TypePerson.INDIVIDUAL)
+                                .build();
 
-        User u2 = User.builder()
-                .name("Lil Top")
-                .email("liltop@test.com")
-                .password("985632589")
-                .document("653.485.456-25")
-                .phone("31 9 9999-9999")
-                .role(r2)
-                .typePerson(TypePerson.INDIVIDUAL)
-                .build();
+                Address ad3 = Address.builder()
+                                .streetAddress("predinho do c1").number("480")
+                                .city("Belo horizonte").state("MG").zipCode("30789-420")
+                                .neighborhood("C1")
+                                .user(u2)
+                                .build();
 
-        Address ad2 = Address.builder()
-                .streetAddress("predinho do c1").number("480")
-                .city("Belo horizonte").state("MG").zipCode("30789-420")
-                .neighborhood("C1")
-                .user(u2)
-                .build();
+                u2.getAddresses().add(ad3);
+                userRepository.saveAll(Arrays.asList(u1, u2));
 
-        u2.getAddresses().add(ad2);
-        userRepository.saveAll(Arrays.asList(u1, u2));
+                Category celular = Category.builder()
+                                .name("Celular")
+                                .build();
 
-        Category celular = Category.builder()
-                .name("Celular")
-                .build();
+                Category eletronicos = Category.builder()
+                                .name("Eletronicos")
+                                .build();
 
-        Category eletronicos = Category.builder()
-                .name("Eletronicos")
-                .build();
+                categoryRepository.saveAll(Arrays.asList(celular, eletronicos));
 
-        categoryRepository.saveAll(Arrays.asList(celular, eletronicos));
+                Product prod1 = Product.builder()
+                                .name("Iphone 10")
+                                .description("Celular da ipple")
+                                .price(new java.math.BigDecimal("2000.00"))
+                                .dimensionsProduct(new DimensionsProduct(0.5, 15.0, 7.0, 1.0))
+                                .build();
 
-        Product prod1 = Product.builder()
-                .name("Iphone 10")
-                .description("Celular da ipple")
-                .price(new java.math.BigDecimal("2000.00"))
-                .dimensionsProduct(new DimensionsProduct(0.5, 15.0, 7.0, 1.0))
-                .build();
+                Product prod2 = Product.builder()
+                                .name("Smart TV 65\" TCL 4K")
+                                .description("A Smart TV TCL 65P7K de 65\" oferece uma experiÃªncia visual. " +
+                                                "Ela combina tecnologia com recursos, elevando o entretenimento domÃ©stico. "
+                                                +
+                                                "Com a resoluÃ§Ã£o 4K UHD")
+                                .price(new java.math.BigDecimal("2300.00"))
+                                .dimensionsProduct(new DimensionsProduct(21.2, 144.5, 14.3, 89.3))
+                                .build();
 
-        Product prod2 = Product.builder()
-                .name("Smart TV 65\" TCL 4K")
-                .description("A Smart TV TCL 65P7K de 65\" oferece uma experiÃªncia visual. " +
-                        "Ela combina tecnologia com recursos, elevando o entretenimento domÃ©stico. " +
-                        "Com a resoluÃ§Ã£o 4K UHD")
-                .price(new java.math.BigDecimal("2300.00"))
-                .dimensionsProduct(new DimensionsProduct(21.2, 144.5, 14.3, 89.3))
-                .build();
+                prod1.getCategories().add(celular);
+                prod1.getCategories().add(eletronicos);
+                prod2.getCategories().add(eletronicos);
 
-        prod1.getCategories().add(celular);
-        prod1.getCategories().add(eletronicos);
-        prod2.getCategories().add(eletronicos);
+                productRepository.saveAll(Arrays.asList(prod1, prod2));
 
-        productRepository.saveAll(Arrays.asList(prod1, prod2));
+                Stock stock1 = Stock.builder()
+                                .product(prod1)
+                                .itemQuantity(50)
+                                .minQuantity(5)
+                                .priceCost(new java.math.BigDecimal("1500.00"))
+                                .build();
 
-        Stock stock1 = Stock.builder()
-                .product(prod1)
-                .itemQuantity(50)
-                .minQuantity(5)
-                .priceCost(new java.math.BigDecimal("1500.00"))
-                .build();
+                Stock stock2 = Stock.builder()
+                                .product(prod2)
+                                .itemQuantity(50)
+                                .minQuantity(5)
+                                .priceCost(new java.math.BigDecimal("1450.00"))
+                                .build();
 
-        Stock stock2 = Stock.builder()
-                .product(prod2)
-                .itemQuantity(50)
-                .minQuantity(5)
-                .priceCost(new java.math.BigDecimal("1450.00"))
-                .build();
+                stockRepository.saveAll(Arrays.asList(stock1, stock2));
 
-        stockRepository.saveAll(Arrays.asList(stock1, stock2));
+                Order ord1 = Order.builder()
+                                .user(u1)
+                                .deliveryAddress(new com.marcomedeiros.nexus_commerce_api.model.sales.DeliveryAddress(
+                                                ad1.getStreetAddress(), ad1.getNumber(), ad1.getCity(), ad1.getState(),
+                                                ad1.getNeighborhood(), ad1.getZipCode(), ad1.getComplement()))
+                                .totalValue(new BigDecimal("2000.00"))
+                                .finalValue(new BigDecimal("2000.00"))
+                                .freightValue(BigDecimal.ZERO)
+                                .orderStatus(OrderStatus.WAITING_PAYMENT)
+                                .build();
 
-        Order ord1 = Order.builder()
-                .user(u1).deliveryAddress(new com.marcomedeiros.nexus_commerce_api.model.sales.DeliveryAddress(ad1.getStreetAddress(), ad1.getNumber(), ad1.getCity(), ad1.getState(), ad1.getNeighborhood(), ad1.getZipCode(), ad1.getComplement()))
-                .totalValue(new BigDecimal("2000.00"))
-                .finalValue(new BigDecimal("2000.00"))
-                .freightValue(BigDecimal.ZERO)
-                .orderStatus(OrderStatus.WAITING_PAYMENT)
-                .build();
+                OrderItem ordIt1 = OrderItem.builder()
+                                .quantity(1)
+                                .unitPrice(prod1.getPrice())
+                                .build();
 
-        OrderItem ordIt1 = OrderItem.builder()
-                .quantity(1)
-                .unitPrice(prod1.getPrice())
-                .build();
+                ordIt1.setOrder(ord1);
+                ordIt1.setProduct(prod1);
 
-        ordIt1.setOrder(ord1);
-        ordIt1.setProduct(prod1);
+                ord1.getItems().add(ordIt1);
+                orderRepository.save(ord1);
 
-        ord1.getItems().add(ordIt1);
-        orderRepository.save(ord1);
-
-        System.out.println("BANCO H2 POPULADO COM SUCESSO!");
-    }
+                System.out.println("BANCO H2 POPULADO COM SUCESSO!");
+        }
 }

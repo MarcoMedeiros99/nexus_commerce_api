@@ -10,13 +10,13 @@ import jakarta.validation.constraints.Pattern;
 @CpfOrCnpj
 public record UserRequestDTO(
 
-                @NotBlank(message = "O nome Ã© obrigatÃ³rio") String name,
+        @NotBlank(message = "O nome é obrigatorio") String name,
 
-                @NotBlank(message = "O documento (CPF ou CNPJ) Ã© obrigatÃ³rio") String document,
+        @NotBlank(message = "O documento (CPF ou CNPJ) é obrigatorio") String document,
 
-                @NotBlank(message = "O telefone Ã© obrigatÃ³rio") @Pattern(regexp = "^\\d{10,11}$", message = "O telefone deve conter apenas nÃºmeros e ter entre 10 e 11 dÃ­gitos") String phone,
+        @NotBlank(message = "O telefone é obrigatorio") @Pattern(regexp = "^\\d{10,11}$", message = "O telefone deve conter apenas nÃºmeros e ter entre 10 e 11 dÃ­gitos") String phone,
 
-                @Email(message = "Formato de e-mail invÃ¡lido. Ex: xxxxxx@xxxxx.com") String email,
+        @Email(message = "Formato de e-mail invalido. Ex: xxxxxx@xxxxx.com") String email,
 
-                @NotNull(message = "O tipo de pessoa Ã© obrigatÃ³rio") TypePerson typePerson) {
+        @NotNull(message = "O tipo de pessoa é obrigatorio") TypePerson typePerson) {
 }

@@ -1,4 +1,4 @@
-package com.marcomedeiros.nexus_commerce_api.service;
+package com.marcomedeiros.nexus_commerce_api.service.access;
 
 import java.util.List;
 
@@ -106,4 +106,3 @@ public class AddressService {
     }
 
 }
-

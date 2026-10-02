@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.marcomedeiros.nexus_commerce_api.dto.access.AddressRequestDTO;
 import com.marcomedeiros.nexus_commerce_api.dto.access.AddressResponseDTO;
-import com.marcomedeiros.nexus_commerce_api.service.AddressService;
+import com.marcomedeiros.nexus_commerce_api.service.access.AddressService;
 
 import jakarta.validation.Valid;
 

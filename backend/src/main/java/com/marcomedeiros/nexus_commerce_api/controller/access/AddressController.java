@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.marcomedeiros.nexus_commerce_api.controller.Exceptions.ResourceNotFoundException;
-import com.marcomedeiros.nexus_commerce_api.model.access.Address;
+import com.marcomedeiros.nexus_commerce_api.dto.access.AddressRequestDTO;
+import com.marcomedeiros.nexus_commerce_api.dto.access.AddressResponseDTO;
 import com.marcomedeiros.nexus_commerce_api.service.AddressService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/address")
@@ -28,28 +30,26 @@ public class AddressController {
 
     // Endpoint para buscar todos os endereços do banco
     @GetMapping(value = "/find-all")
-    public ResponseEntity<List<Address>> findAllAddress() {
-        List<Address> listAddress = service.findAllAddress();
+    public ResponseEntity<List<AddressResponseDTO>> findAllAddress() {
+        List<AddressResponseDTO> listAddress = service.findAllAddress();
         return ResponseEntity.ok().body(listAddress);
     }
 
     // Endpoint para buscar todos os endereços do banco por CEP
     @GetMapping("/zipcode/{zipCode}")
-    public ResponseEntity<Address> findAddressByZipCode(@PathVariable String zipCode) {
+    public ResponseEntity<AddressResponseDTO> findAddressByZipCode(@PathVariable String zipCode) {
         String formattedZipCode = (zipCode != null && zipCode.length() == 8 && !zipCode.contains("-"))
                 ? zipCode.substring(0, 5) + "-" + zipCode.substring(5)
                 : zipCode;
 
-        Address address = service.findAddressByZipCode(formattedZipCode)
-                .orElseThrow(
-                        () -> new ResourceNotFoundException("Address not found with zipCode: " + formattedZipCode));
+        AddressResponseDTO address = service.findAddressByZipCode(formattedZipCode);
         return ResponseEntity.ok().body(address);
     }
 
-    // Endpoints para buscar o endereço por id do usuario
+    // Endpoint para buscar o endereço por id do usuario
     @GetMapping("/user/{idUser}")
-    public ResponseEntity<List<Address>> findAddressByIdUser(@PathVariable Long idUser) {
-        List<Address> addresses = service.findAddressByIdUser(idUser);
+    public ResponseEntity<List<AddressResponseDTO>> findAddressByIdUser(@PathVariable Long idUser) {
+        List<AddressResponseDTO> addresses = service.findAddressByIdUser(idUser);
         return ResponseEntity.ok().body(addresses);
     }
 
@@ -57,18 +57,20 @@ public class AddressController {
 
     // Endpoint para inserir um endereço no banco
     @PostMapping("/user/{idUser}")
-    public ResponseEntity<Address> insertAddress(@PathVariable Long idUser, @RequestBody Address address) {
-        address = service.insertAddress(idUser, address);
-        return ResponseEntity.ok().body(address);
+    public ResponseEntity<AddressResponseDTO> insertAddress(@PathVariable Long idUser,
+            @RequestBody @Valid AddressRequestDTO addressDTO) {
+        AddressResponseDTO response = service.insertAddress(idUser, addressDTO);
+        return ResponseEntity.ok().body(response);
     }
 
     // Metodo PUT
 
     // Endpoint para atualizar um endereço no banco por id do endereço
     @PutMapping("/update/{id}")
-    public ResponseEntity<Address> updateAddress(@PathVariable Long id, @RequestBody Address address) {
-        address = service.updateAddress(id, address);
-        return ResponseEntity.ok().body(address);
+    public ResponseEntity<AddressResponseDTO> updateAddress(@PathVariable Long id,
+            @RequestBody @Valid AddressRequestDTO addressDTO) {
+        AddressResponseDTO response = service.updateAddress(id, addressDTO);
+        return ResponseEntity.ok().body(response);
     }
 
     // Metodo DELETE

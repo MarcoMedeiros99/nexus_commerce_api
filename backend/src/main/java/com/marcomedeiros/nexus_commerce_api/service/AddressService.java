@@ -1,7 +1,6 @@
 package com.marcomedeiros.nexus_commerce_api.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -9,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.marcomedeiros.nexus_commerce_api.controller.Exceptions.DatabaseException;
 import com.marcomedeiros.nexus_commerce_api.controller.Exceptions.ResourceNotFoundException;
+import com.marcomedeiros.nexus_commerce_api.dto.access.AddressRequestDTO;
+import com.marcomedeiros.nexus_commerce_api.dto.access.AddressResponseDTO;
 import com.marcomedeiros.nexus_commerce_api.model.access.Address;
 import com.marcomedeiros.nexus_commerce_api.model.access.User;
 import com.marcomedeiros.nexus_commerce_api.repository.access.AddressRepository;
@@ -25,50 +26,70 @@ public class AddressService {
 
     // Metodos GET
 
-    public List<Address> findAllAddress() {
-        return repository.findAll();
+    public List<AddressResponseDTO> findAllAddress() {
+        return repository.findAll()
+                .stream()
+                .map(AddressResponseDTO::new)
+                .toList();
     }
 
-    public Optional<Address> findAddressByZipCode(String zipCode) {
-        return repository.findByZipCode(zipCode);
+    public AddressResponseDTO findAddressByZipCode(String zipCode) {
+        Address address = repository.findByZipCode(zipCode)
+                .orElseThrow(() -> new ResourceNotFoundException("Address not found with zipCode: " + zipCode));
+        return new AddressResponseDTO(address);
     }
 
-    public List<Address> findAddressByIdUser(Long idUser) {
+    public List<AddressResponseDTO> findAddressByIdUser(Long idUser) {
         userRepository.findById(idUser)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + idUser));
-        return repository.findByUserIdUser(idUser);
+        return repository.findByUserIdUser(idUser)
+                .stream()
+                .map(AddressResponseDTO::new)
+                .toList();
     }
 
     // Metodo POST
 
-    public Address insertAddress(Long idUser, Address address) {
+    public AddressResponseDTO insertAddress(Long idUser, AddressRequestDTO dto) {
         User user = userRepository.findById(idUser)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + idUser));
 
         boolean addressExists = repository.existsByUserIdUserAndZipCodeAndNumber(
-                idUser, address.getZipCode(), address.getNumber());
+                idUser, dto.zipCode(), dto.number());
         if (addressExists) {
-            throw new DatabaseException("Address with zipCode: " + address.getZipCode()
-                    + " and number: " + address.getNumber() + " already exists for this user.");
+            throw new DatabaseException("Address with zipCode: " + dto.zipCode()
+                    + " and number: " + dto.number() + " already exists for this user.");
         }
 
+        Address address = new Address();
+        address.setStreet(dto.street());
+        address.setNumber(dto.number());
+        address.setCity(dto.city());
+        address.setState(dto.state());
+        address.setNeighborhood(dto.neighborhood());
+        address.setComplement(dto.complement());
+        address.setZipCode(dto.zipCode());
         address.setUser(user);
-        return repository.save(address);
+
+        Address saved = repository.save(address);
+        return new AddressResponseDTO(saved);
     }
 
     // Metodo PUT
 
-    public Address updateAddress(Long id, Address address) {
+    public AddressResponseDTO updateAddress(Long id, AddressRequestDTO dto) {
         Address existingAddress = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Address not found with id: " + id));
-        existingAddress.setZipCode(address.getZipCode());
-        existingAddress.setStreet(address.getStreet());
-        existingAddress.setNumber(address.getNumber());
-        existingAddress.setComplement(address.getComplement());
-        existingAddress.setNeighborhood(address.getNeighborhood());
-        existingAddress.setCity(address.getCity());
-        existingAddress.setState(address.getState());
-        return repository.save(existingAddress);
+        existingAddress.setZipCode(dto.zipCode());
+        existingAddress.setStreet(dto.street());
+        existingAddress.setNumber(dto.number());
+        existingAddress.setComplement(dto.complement());
+        existingAddress.setNeighborhood(dto.neighborhood());
+        existingAddress.setCity(dto.city());
+        existingAddress.setState(dto.state());
+
+        Address saved = repository.save(existingAddress);
+        return new AddressResponseDTO(saved);
     }
 
     // Metodo DELETE
@@ -85,3 +106,4 @@ public class AddressService {
     }
 
 }
+

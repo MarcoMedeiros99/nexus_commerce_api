@@ -1,6 +1,5 @@
 package com.marcomedeiros.nexus_commerce_api.repository.access;
 
-import com.marcomedeiros.nexus_commerce_api.dto.access.FreightRequestDTO;
 import com.marcomedeiros.nexus_commerce_api.model.access.Address;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +12,6 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
     List<Address> findByUserIdUser(Long idUser);
 
     Optional<Address> findByZipCode(String zipCode);
+
+    boolean existsByUserIdUserAndZipCodeAndNumber(Long idUser, String zipCode, String number);
 }

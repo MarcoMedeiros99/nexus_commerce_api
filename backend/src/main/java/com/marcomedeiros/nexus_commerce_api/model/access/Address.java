@@ -9,6 +9,7 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
+
 @Entity
 @Table(name = "tb_address")
 @Getter
@@ -26,7 +27,7 @@ public class Address implements Serializable {
     private Long idAddress;
     @NotBlank
     @Column(nullable = false, length = 150)
-    private String streetAddress;
+    private String street;
     @NotBlank
     @Size(max = 10)
     private String number;

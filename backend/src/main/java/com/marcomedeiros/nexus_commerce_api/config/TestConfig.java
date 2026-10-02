@@ -65,14 +65,14 @@ public class TestConfig implements CommandLineRunner {
                                 .build();
 
                 Address ad1 = Address.builder()
-                                .streetAddress("Virgilio Salomão").number("49")
+                                .street("Virgilio Salomão").number("49")
                                 .city("Belo horizonte").state("MG").zipCode("30670-250")
                                 .neighborhood("Vila Pinho")
                                 .user(u1)
                                 .build();
 
                 Address ad2 = Address.builder()
-                                .streetAddress("Terezinha viana de assis").number("79")
+                                .street("Terezinha viana de assis").number("79")
                                 .city("Belo horizonte").state("MG").zipCode("30670-240")
                                 .neighborhood("Vila Pinho")
                                 .user(u1)
@@ -92,7 +92,7 @@ public class TestConfig implements CommandLineRunner {
                                 .build();
 
                 Address ad3 = Address.builder()
-                                .streetAddress("predinho do c1").number("480")
+                                .street("predinho do c1").number("480")
                                 .city("Belo horizonte").state("MG").zipCode("30789-420")
                                 .neighborhood("C1")
                                 .user(u2)
@@ -153,7 +153,7 @@ public class TestConfig implements CommandLineRunner {
                 Order ord1 = Order.builder()
                                 .user(u1)
                                 .deliveryAddress(new com.marcomedeiros.nexus_commerce_api.model.sales.DeliveryAddress(
-                                                ad1.getStreetAddress(), ad1.getNumber(), ad1.getCity(), ad1.getState(),
+                                                ad1.getStreet(), ad1.getNumber(), ad1.getCity(), ad1.getState(),
                                                 ad1.getNeighborhood(), ad1.getZipCode(), ad1.getComplement()))
                                 .totalValue(new BigDecimal("2000.00"))
                                 .finalValue(new BigDecimal("2000.00"))

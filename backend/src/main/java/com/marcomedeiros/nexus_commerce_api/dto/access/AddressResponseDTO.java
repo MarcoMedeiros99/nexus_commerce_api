@@ -13,16 +13,15 @@ public record AddressResponseDTO(
         String complement,
         String zipCode) {
 
-    public AddressResponseDTO(Address address){
+    public AddressResponseDTO(Address address) {
         this(
                 address.getIdAddress(),
-                address.getStreetAddress(),
+                address.getStreet(),
                 address.getNumber(),
                 address.getCity(),
                 address.getState(),
                 address.getNeighborhood(),
                 address.getComplement(),
-                address.getZipCode()
-        );
+                address.getZipCode());
     }
 }

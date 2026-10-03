@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.marcomedeiros.nexus_commerce_api.dto.access.RoleRequestDTO;
 import com.marcomedeiros.nexus_commerce_api.dto.access.RoleResponseDTO;
 import com.marcomedeiros.nexus_commerce_api.service.access.RoleService;
 
@@ -32,6 +35,14 @@ public class RoleController {
     @GetMapping(value = "/code/{accessCode}")
     public ResponseEntity<RoleResponseDTO> findRoleByCode(@PathVariable String accessCode) {
         RoleResponseDTO role = service.findRoleByCode(accessCode);
+        return ResponseEntity.ok().body(role);
+    }
+
+    // Metodos POST
+
+    @PostMapping(value = "/insert")
+    public ResponseEntity<RoleResponseDTO> insertRole(@RequestBody RoleRequestDTO dto) {
+        RoleResponseDTO role = service.insertRole(null, dto);
         return ResponseEntity.ok().body(role);
     }
 

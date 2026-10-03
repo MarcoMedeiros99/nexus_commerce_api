@@ -1,6 +1,7 @@
 package com.marcomedeiros.nexus_commerce_api.repository.access;
 
 import com.marcomedeiros.nexus_commerce_api.model.access.Role;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +14,8 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
     Optional<Role> findByNameRoleIgnoreCase(String nameRole);
 
     Optional<Role> findByAccessCode(String accessCode);
+
+    boolean existsByAccessCode(String accessCode);
+
+    boolean existsByNameRole(String nameRole);
 }

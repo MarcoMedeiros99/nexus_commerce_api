@@ -1,7 +1,6 @@
 package com.marcomedeiros.nexus_commerce_api.service.access;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,9 +8,10 @@ import org.springframework.stereotype.Service;
 import com.marcomedeiros.nexus_commerce_api.dto.access.RoleRequestDTO;
 import com.marcomedeiros.nexus_commerce_api.dto.access.RoleResponseDTO;
 import com.marcomedeiros.nexus_commerce_api.model.access.Role;
-import com.marcomedeiros.nexus_commerce_api.model.access.User;
 import com.marcomedeiros.nexus_commerce_api.repository.access.RoleRepository;
-import com.marcomedeiros.nexus_commerce_api.repository.access.UserRepository;
+
+import jakarta.validation.Valid;
+
 import com.marcomedeiros.nexus_commerce_api.controller.Exceptions.DatabaseException;
 import com.marcomedeiros.nexus_commerce_api.controller.Exceptions.ResourceNotFoundException;
 
@@ -20,9 +20,6 @@ public class RoleService {
 
     @Autowired
     private RoleRepository repository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     // Metodos GET
 
@@ -53,6 +50,17 @@ public class RoleService {
         Role savedRole = repository.save(role);
         return new RoleResponseDTO(savedRole);
 
+    }
+
+    // Metodos PUT
+
+    public RoleResponseDTO updateRole(Long id, @Valid RoleRequestDTO dto) {
+        Role existingRole = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Role not found with id: " + id));
+        existingRole.setNameRole(dto.nameRole());
+
+        Role savedRole = repository.save(existingRole);
+        return new RoleResponseDTO(savedRole);
     }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.marcomedeiros.nexus_commerce_api.dto.access.RoleRequestDTO;
 import com.marcomedeiros.nexus_commerce_api.dto.access.RoleResponseDTO;
 import com.marcomedeiros.nexus_commerce_api.service.access.RoleService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/role")
@@ -40,10 +43,20 @@ public class RoleController {
 
     // Metodos POST
 
+    // Endpoint para inserir uma role
     @PostMapping(value = "/insert")
     public ResponseEntity<RoleResponseDTO> insertRole(@RequestBody RoleRequestDTO dto) {
         RoleResponseDTO role = service.insertRole(null, dto);
         return ResponseEntity.ok().body(role);
+    }
+
+    // Metodos PUT
+
+    @PutMapping(value = "/update/{id}")
+    public ResponseEntity<RoleResponseDTO> updateRole(@PathVariable Long id,
+            @RequestBody @Valid RoleRequestDTO dto) {
+        RoleResponseDTO response = service.updateRole(id, dto);
+        return ResponseEntity.ok().body(response);
     }
 
 }

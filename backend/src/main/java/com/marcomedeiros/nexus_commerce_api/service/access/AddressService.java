@@ -26,6 +26,7 @@ public class AddressService {
 
     // Metodos GET
 
+    // Metodo para buscar todos os endereços
     public List<AddressResponseDTO> findAllAddress() {
         return repository.findAll()
                 .stream()
@@ -33,12 +34,14 @@ public class AddressService {
                 .toList();
     }
 
+    // Metodo para buscar um endereço pelo zipCode
     public AddressResponseDTO findAddressByZipCode(String zipCode) {
         Address address = repository.findByZipCode(zipCode)
                 .orElseThrow(() -> new ResourceNotFoundException("Address not found with zipCode: " + zipCode));
         return new AddressResponseDTO(address);
     }
 
+    // Metodo para buscar um endereço pelo id do usuario
     public List<AddressResponseDTO> findAddressByIdUser(Long idUser) {
         userRepository.findById(idUser)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + idUser));
@@ -50,6 +53,7 @@ public class AddressService {
 
     // Metodo POST
 
+    // Metodo para inserir um endereço
     public AddressResponseDTO insertAddress(Long idUser, AddressRequestDTO dto) {
         User user = userRepository.findById(idUser)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + idUser));
@@ -77,6 +81,7 @@ public class AddressService {
 
     // Metodo PUT
 
+    // Metodo para atualizar um endereço
     public AddressResponseDTO updateAddress(Long id, AddressRequestDTO dto) {
         Address existingAddress = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Address not found with id: " + id));
@@ -94,6 +99,7 @@ public class AddressService {
 
     // Metodo DELETE
 
+    // Metodo para deletar um endereço
     public void deleteAddress(Long id) {
         try {
             if (!repository.existsById(id)) {

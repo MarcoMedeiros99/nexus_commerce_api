@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,13 @@ public class RoleController {
     private RoleService service;
 
     // Metodos GET
+
+    // Endpoit para buscar uma role pelo id
+    @GetMapping(value = "/find/{id}")
+    public ResponseEntity<RoleResponseDTO> findRoleById(@PathVariable Long id) {
+        RoleResponseDTO role = service.findRoleById(id);
+        return ResponseEntity.ok().body(role);
+    }
 
     // Endpoint para buscar todas as roles
     @GetMapping(value = "/find-all")
@@ -50,8 +58,9 @@ public class RoleController {
         return ResponseEntity.ok().body(role);
     }
 
-    // Metodos PUT
+    // Metodo PUT
 
+    // Endpoint para atualizar uma role pelo id
     @PutMapping(value = "/update/{id}")
     public ResponseEntity<RoleResponseDTO> updateRole(@PathVariable Long id,
             @RequestBody @Valid RoleRequestDTO dto) {
@@ -59,4 +68,12 @@ public class RoleController {
         return ResponseEntity.ok().body(response);
     }
 
+    // Metodo DELETE
+
+    // Endpoint para deletar uma role por id
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<Void> deleteRole(@PathVariable Long id) {
+        service.deleteRole(id);
+        return ResponseEntity.noContent().build();
+    }
 }

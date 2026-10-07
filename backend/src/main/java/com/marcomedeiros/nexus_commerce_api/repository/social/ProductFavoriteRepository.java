@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.repository.social;
+package com.marcomedeiros.nexus_commerce_api.repository.social;
 
 import com.marcomedeiros.nexus_commerce_api.model.social.ProductFavorite;
 import org.springframework.data.jpa.repository.JpaRepository;

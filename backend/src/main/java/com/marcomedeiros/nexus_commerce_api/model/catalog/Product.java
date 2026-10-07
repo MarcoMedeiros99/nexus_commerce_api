@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.model.catalog;
+package com.marcomedeiros.nexus_commerce_api.model.catalog;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

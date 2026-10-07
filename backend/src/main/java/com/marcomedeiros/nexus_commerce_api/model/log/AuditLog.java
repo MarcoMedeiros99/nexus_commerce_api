@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.model.log;
+package com.marcomedeiros.nexus_commerce_api.model.log;
 
 import com.marcomedeiros.nexus_commerce_api.model.access.User;
 import com.marcomedeiros.nexus_commerce_api.model.log.enums.ActionType;

@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.model.catalog;
+package com.marcomedeiros.nexus_commerce_api.model.catalog;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

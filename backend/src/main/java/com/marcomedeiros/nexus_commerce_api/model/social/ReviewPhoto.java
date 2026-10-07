@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.model.social;
+package com.marcomedeiros.nexus_commerce_api.model.social;
 
 import jakarta.persistence.*;
 import lombok.*;

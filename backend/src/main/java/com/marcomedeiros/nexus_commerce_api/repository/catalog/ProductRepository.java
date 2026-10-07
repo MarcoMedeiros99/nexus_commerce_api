@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.repository.catalog;
+package com.marcomedeiros.nexus_commerce_api.repository.catalog;
 
 import com.marcomedeiros.nexus_commerce_api.model.catalog.Product;
 import org.springframework.data.jpa.repository.JpaRepository;

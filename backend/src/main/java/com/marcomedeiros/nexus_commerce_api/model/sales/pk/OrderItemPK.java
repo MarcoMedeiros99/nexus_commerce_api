@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.model.sales.pk;
+package com.marcomedeiros.nexus_commerce_api.model.sales.pk;
 
 import com.marcomedeiros.nexus_commerce_api.model.catalog.Product;
 import com.marcomedeiros.nexus_commerce_api.model.sales.Order;

@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.model.social;
+package com.marcomedeiros.nexus_commerce_api.model.social;
 
 import com.marcomedeiros.nexus_commerce_api.model.access.User;
 import com.marcomedeiros.nexus_commerce_api.model.catalog.Product;

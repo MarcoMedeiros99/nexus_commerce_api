@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.model.sales.enums.converters;
+package com.marcomedeiros.nexus_commerce_api.model.sales.enums.converters;
 
 import com.marcomedeiros.nexus_commerce_api.model.sales.enums.OrderStatus;
 import jakarta.persistence.AttributeConverter;

@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.model.log.enums;
+package com.marcomedeiros.nexus_commerce_api.model.log.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

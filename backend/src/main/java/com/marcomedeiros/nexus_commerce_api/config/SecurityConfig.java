@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.config;
+package com.marcomedeiros.nexus_commerce_api.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

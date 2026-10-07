@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.config;
+package com.marcomedeiros.nexus_commerce_api.config;
 
 import com.marcomedeiros.nexus_commerce_api.model.access.Address;
 import com.marcomedeiros.nexus_commerce_api.model.access.Role;
@@ -58,10 +58,10 @@ public class TestConfig implements CommandLineRunner {
                                 .name("Majin Kodak")
                                 .email("majinkodak@test.com")
                                 .password("321741369")
-                                .document("123.321.456-25")
-                                .phone("31 9 9999-9999")
+                                .document("142.153.316-25")
+                                .phone("(31)99999-9999")
                                 .role(r1)
-                                .typePerson(TypePerson.CORPORATE)
+                                .typePerson(TypePerson.INDIVIDUAL)
                                 .build();
 
                 Address ad1 = Address.builder()
@@ -85,8 +85,8 @@ public class TestConfig implements CommandLineRunner {
                                 .name("Lil Top")
                                 .email("liltop@test.com")
                                 .password("985632589")
-                                .document("653.485.456-25")
-                                .phone("31 9 9999-9999")
+                                .document("117.862.426-99")
+                                .phone("(31)98888-8888")
                                 .role(r2)
                                 .typePerson(TypePerson.INDIVIDUAL)
                                 .build();

@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.dto.catalog;
+package com.marcomedeiros.nexus_commerce_api.dto.catalog;
 
 import jakarta.validation.constraints.NotBlank;
 

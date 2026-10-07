@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.validation;
+package com.marcomedeiros.nexus_commerce_api.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

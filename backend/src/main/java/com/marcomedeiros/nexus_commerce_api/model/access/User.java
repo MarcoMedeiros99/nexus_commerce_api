@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.model.access;
+package com.marcomedeiros.nexus_commerce_api.model.access;
 
 import com.marcomedeiros.nexus_commerce_api.model.access.enums.TypePerson;
 import jakarta.persistence.*;

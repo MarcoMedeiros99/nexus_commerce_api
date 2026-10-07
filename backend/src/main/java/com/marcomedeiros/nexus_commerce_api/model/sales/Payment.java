@@ -1,4 +1,4 @@
-﻿package com.marcomedeiros.nexus_commerce_api.model.sales;
+package com.marcomedeiros.nexus_commerce_api.model.sales;
 
 import com.marcomedeiros.nexus_commerce_api.model.sales.enums.PaymentMethod;
 import com.marcomedeiros.nexus_commerce_api.model.sales.enums.converters.PaymentMethodConverter;

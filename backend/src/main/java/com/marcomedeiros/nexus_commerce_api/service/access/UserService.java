@@ -5,9 +5,14 @@ import com.marcomedeiros.nexus_commerce_api.validation.DocumentValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.marcomedeiros.nexus_commerce_api.controller.Exceptions.DatabaseException;
 import com.marcomedeiros.nexus_commerce_api.controller.Exceptions.ResourceNotFoundException;
+import com.marcomedeiros.nexus_commerce_api.dto.access.UserRequestDTO;
 import com.marcomedeiros.nexus_commerce_api.dto.access.UserResponseDTO;
+import com.marcomedeiros.nexus_commerce_api.model.access.Role;
 import com.marcomedeiros.nexus_commerce_api.model.access.User;
+import com.marcomedeiros.nexus_commerce_api.model.access.enums.TypePerson;
+import com.marcomedeiros.nexus_commerce_api.repository.access.RoleRepository;
 import com.marcomedeiros.nexus_commerce_api.repository.access.UserRepository;
 
 @Service
@@ -15,6 +20,9 @@ public class UserService {
 
     @Autowired
     private UserRepository repository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     // Metodos GET
 
@@ -54,5 +62,43 @@ public class UserService {
                 .or(() -> repository.findByDocument(rawDocument))
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with document: " + document));
         return new UserResponseDTO(user);
+    }
+
+    // Metodos POST
+
+    // Metodo para inserir um user
+    public UserResponseDTO insert(UserRequestDTO dto) {
+        if (repository.existsByEmail(dto.email())) {
+            throw new DatabaseException("Email already registered: " + dto.email());
+        }
+
+        if (!DocumentValidator.isValid(dto.document())) {
+            throw new ResourceNotFoundException("Invalid document format: " + dto.document());
+        }
+
+        String formattedDocument = DocumentValidator.format(dto.document());
+        String rawDocument = dto.document().replaceAll("\\D", "");
+
+        if (repository.existsByDocument(formattedDocument) || repository.existsByDocument(rawDocument)) {
+            throw new DatabaseException("Document already registered: " + dto.document());
+        }
+
+        Role clientRole = roleRepository.findByNameRoleIgnoreCase("CLIENT")
+                .orElseThrow(() -> new ResourceNotFoundException("Role CLIENT not found."));
+
+        TypePerson typePerson = TypePerson.fromDocument(rawDocument);
+
+        User user = User.builder()
+                .name(dto.name())
+                .document(formattedDocument)
+                .phone(dto.phone())
+                .email(dto.email())
+                .password(dto.password())
+                .typePerson(typePerson)
+                .role(clientRole)
+                .build();
+
+        User savedUser = repository.save(user);
+        return new UserResponseDTO(savedUser);
     }
 }

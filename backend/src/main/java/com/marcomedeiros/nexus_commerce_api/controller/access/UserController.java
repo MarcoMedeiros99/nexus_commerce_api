@@ -4,11 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.marcomedeiros.nexus_commerce_api.dto.access.UserRequestDTO;
 import com.marcomedeiros.nexus_commerce_api.dto.access.UserResponseDTO;
 import com.marcomedeiros.nexus_commerce_api.service.access.UserService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -44,6 +49,15 @@ public class UserController {
     @GetMapping(value = "/document/{document}")
     public ResponseEntity<UserResponseDTO> findByDocument(@PathVariable String document) {
         UserResponseDTO response = service.findByDocument(document);
+        return ResponseEntity.ok().body(response);
+    }
+
+    // Metodos POST
+
+    // Endpoint para inserir um user
+    @PostMapping(value = "/insert")
+    public ResponseEntity<UserResponseDTO> insert(@RequestBody @Valid UserRequestDTO dto) {
+        UserResponseDTO response = service.insert(dto);
         return ResponseEntity.ok().body(response);
     }
 }

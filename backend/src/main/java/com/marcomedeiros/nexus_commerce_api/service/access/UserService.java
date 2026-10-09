@@ -2,6 +2,9 @@ package com.marcomedeiros.nexus_commerce_api.service.access;
 
 import com.marcomedeiros.nexus_commerce_api.util.AccessCodeUtils;
 import com.marcomedeiros.nexus_commerce_api.validation.DocumentValidator;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -97,6 +100,37 @@ public class UserService {
                 .typePerson(typePerson)
                 .role(clientRole)
                 .build();
+
+        User savedUser = repository.save(user);
+        return new UserResponseDTO(savedUser);
+    }
+
+    // Metodo PUT
+
+    // Metodo para atualizar um user
+    public UserResponseDTO update(Long id, UserRequestDTO dto) {
+
+        User user = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+
+        // Documento é imutável — rejeita qualquer tentativa de alteração
+        String formattedDocumentDto = DocumentValidator.format(dto.document());
+        String rawDocumentDto = dto.document().replaceAll("\\D", "");
+
+        if (!user.getDocument().equals(formattedDocumentDto) &&
+                !user.getDocument().equals(rawDocumentDto)) {
+            throw new DatabaseException("Document cannot be changed.");
+        }
+
+        if (!user.getEmail().equals(dto.email()) &&
+                repository.existsByEmail(dto.email())) {
+            throw new DatabaseException("Email already registered: " + dto.email());
+        }
+
+        user.setName(dto.name());
+        user.setPhone(dto.phone());
+        user.setEmail(dto.email());
+        user.setPassword(dto.password());
 
         User savedUser = repository.save(user);
         return new UserResponseDTO(savedUser);

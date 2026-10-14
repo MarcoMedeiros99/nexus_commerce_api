@@ -2,6 +2,8 @@ package com.marcomedeiros.nexus_commerce_api.model.access;
 
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.marcomedeiros.nexus_commerce_api.model.access.users.User;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -19,25 +21,32 @@ import java.io.Serializable;
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Address implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 1L;
+
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAddress;
+
     @NotBlank
     @Column(nullable = false, length = 150)
     private String street;
+
     @NotBlank
     @Size(max = 10)
     private String number;
+
     @NotBlank
     @Column(nullable = false, length = 60)
     private String city;
+
     @NotBlank
     @Size(min = 2, max = 2)
     @Column(nullable = false)
     private String state;
+
     @NotBlank
     String neighborhood;
     @Pattern(regexp = "\\d{5}-\\d{3}")
@@ -45,6 +54,7 @@ public class Address implements Serializable {
     private String zipCode; // CEP
 
     private String complement;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user") // FK

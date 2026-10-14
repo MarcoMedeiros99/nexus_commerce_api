@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.marcomedeiros.nexus_commerce_api.dto.access.UserRequestDTO;
-import com.marcomedeiros.nexus_commerce_api.dto.access.UserResponseDTO;
+import com.marcomedeiros.nexus_commerce_api.dto.access.users.UserRequestDTO;
+import com.marcomedeiros.nexus_commerce_api.dto.access.users.UserResponseDTO;
 import com.marcomedeiros.nexus_commerce_api.service.access.UserService;
 
 import jakarta.validation.Valid;
@@ -62,12 +62,33 @@ public class UserController {
         return ResponseEntity.ok().body(response);
     }
 
-    // Metodo PUT
+    // Metodos PUT
 
-    // Endpoint para atualizar um user
-    @PutMapping(value = "/update/{id}")
-    public ResponseEntity<UserResponseDTO> update(@PathVariable Long id, @RequestBody @Valid UserRequestDTO dto) {
-        UserResponseDTO response = service.update(id, dto);
+    // Endpoint para atualizar o nome de um user
+    @PutMapping(value = "/update/name/{id}")
+    public ResponseEntity<UserResponseDTO> updateName(@PathVariable Long id, @RequestBody String name) {
+        UserResponseDTO response = service.updateName(id, name);
+        return ResponseEntity.ok().body(response);
+    }
+
+    // Endpoint para atualizar o email de um user
+    @PutMapping(value = "/update/email/{id}")
+    public ResponseEntity<UserResponseDTO> updateEmail(@PathVariable Long id, @RequestBody String email) {
+        UserResponseDTO response = service.updateEmail(id, email);
+        return ResponseEntity.ok().body(response);
+    }
+
+    // Endpoint para atualizar o telefone de um user
+    @PutMapping(value = "/update/phone/{id}")
+    public ResponseEntity<UserResponseDTO> updatePhone(@PathVariable Long id, @RequestBody String phone) {
+        UserResponseDTO response = service.updatePhone(id, phone);
+        return ResponseEntity.ok().body(response);
+    }
+
+    // Endpoint para atualizar a senha de um user
+    @PutMapping(value = "/update/password/{id}")
+    public ResponseEntity<UserResponseDTO> updatePassword(@PathVariable Long id, @RequestBody String password) {
+        UserResponseDTO response = service.updatePassword(id, password);
         return ResponseEntity.ok().body(response);
     }
 }

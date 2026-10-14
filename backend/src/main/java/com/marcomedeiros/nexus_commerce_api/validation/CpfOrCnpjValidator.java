@@ -1,6 +1,7 @@
 package com.marcomedeiros.nexus_commerce_api.validation;
 
-import com.marcomedeiros.nexus_commerce_api.dto.access.UserRequestDTO;
+import com.marcomedeiros.nexus_commerce_api.dto.access.users.UserRequestDTO;
+
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -24,4 +25,3 @@ public class CpfOrCnpjValidator implements ConstraintValidator<CpfOrCnpj, UserRe
         return isValid;
     }
 }
-

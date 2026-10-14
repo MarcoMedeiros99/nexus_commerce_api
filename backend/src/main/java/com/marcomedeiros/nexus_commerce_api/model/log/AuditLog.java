@@ -1,11 +1,12 @@
 package com.marcomedeiros.nexus_commerce_api.model.log;
 
-import com.marcomedeiros.nexus_commerce_api.model.access.User;
+import com.marcomedeiros.nexus_commerce_api.model.access.users.User;
 import com.marcomedeiros.nexus_commerce_api.model.log.enums.ActionType;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "tb_audit_log")
 @Getter
@@ -21,13 +22,14 @@ public class AuditLog {
     private LocalDateTime dateTime;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
-    private User user; // Quem fez a aÃ§Ã£o
+    private User user;
     @Column(name = "action_type", nullable = false)
     private ActionType actionType;
     @Column(columnDefinition = "TEXT")
     private String description;
     @Column(name = "ip_address", length = 45)
     private String ipAddress;
+
     @PrePersist
     protected void onCreate() {
         this.dateTime = LocalDateTime.now();

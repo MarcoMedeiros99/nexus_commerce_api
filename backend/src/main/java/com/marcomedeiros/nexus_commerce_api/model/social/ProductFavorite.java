@@ -1,14 +1,15 @@
 package com.marcomedeiros.nexus_commerce_api.model.social;
 
-import com.marcomedeiros.nexus_commerce_api.model.access.User;
+import com.marcomedeiros.nexus_commerce_api.model.access.users.User;
 import com.marcomedeiros.nexus_commerce_api.model.catalog.Product;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "tb_product_favorite", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"id_user", "id_product"})})
+        @UniqueConstraint(columnNames = { "id_user", "id_product" }) })
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,6 +30,7 @@ public class ProductFavorite {
     private Product product;
     @Column(nullable = false)
     private LocalDateTime addFavorite;
+
     @PrePersist
     protected void onCreate() {
         this.addFavorite = LocalDateTime.now();

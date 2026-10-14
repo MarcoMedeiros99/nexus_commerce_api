@@ -2,8 +2,8 @@ package com.marcomedeiros.nexus_commerce_api.config;
 
 import com.marcomedeiros.nexus_commerce_api.model.access.Address;
 import com.marcomedeiros.nexus_commerce_api.model.access.Role;
-import com.marcomedeiros.nexus_commerce_api.model.access.User;
 import com.marcomedeiros.nexus_commerce_api.model.access.enums.TypePerson;
+import com.marcomedeiros.nexus_commerce_api.model.access.users.User;
 import com.marcomedeiros.nexus_commerce_api.model.catalog.Category;
 import com.marcomedeiros.nexus_commerce_api.model.catalog.DimensionsProduct;
 import com.marcomedeiros.nexus_commerce_api.model.catalog.Product;

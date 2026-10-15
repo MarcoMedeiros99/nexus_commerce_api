@@ -46,7 +46,7 @@ public class RoleController {
 
     // Endpoint para inserir uma role
     @PostMapping(value = "/insert")
-    public ResponseEntity<RoleResponseDTO> insertRole(@RequestBody RoleRequestDTO dto) {
+    public ResponseEntity<RoleResponseDTO> insertRole(@RequestBody @Valid RoleRequestDTO dto) {
         RoleResponseDTO role = service.insertRole(dto);
         return ResponseEntity.ok().body(role);
     }

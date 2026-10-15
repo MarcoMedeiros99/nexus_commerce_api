@@ -51,13 +51,14 @@ public class RoleService {
 
     // Metodo para inserir uma role
     public RoleResponseDTO insertRole(@Valid RoleRequestDTO dto) {
+        String roleName = dto.roleName() != null ? dto.roleName().trim().toUpperCase() : null;
 
-        if (repository.existsByNameRole(dto.nameRole())) {
-            throw new DatabaseException("A role with the name " + dto.nameRole() + " already exists.");
+        if (repository.existsByNameRole(roleName)) {
+            throw new DatabaseException("A role with the name " + roleName + " already exists.");
         }
 
         Role role = new Role();
-        role.setNameRole(dto.nameRole());
+        role.setNameRole(roleName);
         Role savedRole = repository.save(role);
         return new RoleResponseDTO(savedRole);
     }
@@ -69,7 +70,14 @@ public class RoleService {
         String formattedCode = AccessCodeUtils.formatRoleAccessCode(accessCode);
         Role existingRole = repository.findByAccessCode(formattedCode)
                 .orElseThrow(() -> new ResourceNotFoundException("Role not found with access code: " + formattedCode));
-        existingRole.setNameRole(dto.nameRole());
+
+        String roleName = dto.roleName() != null ? dto.roleName().trim().toUpperCase() : null;
+
+        if (repository.existsByNameRole(roleName) && !existingRole.getNameRole().equalsIgnoreCase(roleName)) {
+            throw new DatabaseException("A role with the name " + roleName + " already exists.");
+        }
+
+        existingRole.setNameRole(roleName);
 
         Role savedRole = repository.save(existingRole);
         return new RoleResponseDTO(savedRole);

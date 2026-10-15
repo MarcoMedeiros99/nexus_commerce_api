@@ -25,10 +25,10 @@ public class UserController {
 
     // Metodos GET
 
-    // Metodo para buscar um user pelo id
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<UserResponseDTO> findById(@PathVariable Long id) {
-        UserResponseDTO response = service.findById(id);
+    // Metodo para buscar um user pelo access code (identificador público)
+    @GetMapping(value = "/{accessCode}")
+    public ResponseEntity<UserResponseDTO> findByAccessCode(@PathVariable String accessCode) {
+        UserResponseDTO response = service.findByAccessCode(accessCode);
         return ResponseEntity.ok().body(response);
     }
 
@@ -36,13 +36,6 @@ public class UserController {
     @GetMapping(value = "/email/{email}")
     public ResponseEntity<UserResponseDTO> findByEmail(@PathVariable String email) {
         UserResponseDTO response = service.findByEmail(email);
-        return ResponseEntity.ok().body(response);
-    }
-
-    // Metodo para buscar um user pelo access code
-    @GetMapping(value = "/access-code/{accessCode}")
-    public ResponseEntity<UserResponseDTO> findByAccessCode(@PathVariable String accessCode) {
-        UserResponseDTO response = service.findByAccessCode(accessCode);
         return ResponseEntity.ok().body(response);
     }
 
@@ -64,31 +57,32 @@ public class UserController {
 
     // Metodos PUT
 
-    // Endpoint para atualizar o nome de um user
-    @PutMapping(value = "/update/name/{id}")
-    public ResponseEntity<UserResponseDTO> updateName(@PathVariable Long id, @RequestBody String name) {
-        UserResponseDTO response = service.updateName(id, name);
+    // Endpoint para atualizar o nome de um user via accessCode
+    @PutMapping(value = "/update/name/{accessCode}")
+    public ResponseEntity<UserResponseDTO> updateName(@PathVariable String accessCode, @RequestBody String name) {
+        UserResponseDTO response = service.updateName(accessCode, name);
         return ResponseEntity.ok().body(response);
     }
 
-    // Endpoint para atualizar o email de um user
-    @PutMapping(value = "/update/email/{id}")
-    public ResponseEntity<UserResponseDTO> updateEmail(@PathVariable Long id, @RequestBody String email) {
-        UserResponseDTO response = service.updateEmail(id, email);
+    // Endpoint para atualizar o email de um user via accessCode
+    @PutMapping(value = "/update/email/{accessCode}")
+    public ResponseEntity<UserResponseDTO> updateEmail(@PathVariable String accessCode, @RequestBody String email) {
+        UserResponseDTO response = service.updateEmail(accessCode, email);
         return ResponseEntity.ok().body(response);
     }
 
-    // Endpoint para atualizar o telefone de um user
-    @PutMapping(value = "/update/phone/{id}")
-    public ResponseEntity<UserResponseDTO> updatePhone(@PathVariable Long id, @RequestBody String phone) {
-        UserResponseDTO response = service.updatePhone(id, phone);
+    // Endpoint para atualizar o telefone de um user via accessCode
+    @PutMapping(value = "/update/phone/{accessCode}")
+    public ResponseEntity<UserResponseDTO> updatePhone(@PathVariable String accessCode, @RequestBody String phone) {
+        UserResponseDTO response = service.updatePhone(accessCode, phone);
         return ResponseEntity.ok().body(response);
     }
 
-    // Endpoint para atualizar a senha de um user
-    @PutMapping(value = "/update/password/{id}")
-    public ResponseEntity<UserResponseDTO> updatePassword(@PathVariable Long id, @RequestBody String password) {
-        UserResponseDTO response = service.updatePassword(id, password);
+    // Endpoint para atualizar a senha de um user via accessCode
+    @PutMapping(value = "/update/password/{accessCode}")
+    public ResponseEntity<UserResponseDTO> updatePassword(@PathVariable String accessCode,
+            @RequestBody String password) {
+        UserResponseDTO response = service.updatePassword(accessCode, password);
         return ResponseEntity.ok().body(response);
     }
 }

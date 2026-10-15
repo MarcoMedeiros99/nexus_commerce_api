@@ -27,13 +27,13 @@ public class Role implements Serializable {
     @Column(nullable = false, unique = true)
     private String nameRole;
 
-    @Column(name = "access_code", nullable = false, unique = true, updatable = false, length = 15)
+    @Column(name = "access_code", nullable = false, unique = true, updatable = false, length = 20)
     private String accessCode;
 
     @PrePersist
     private void generateAccessCode() {
         if (accessCode == null) {
-            String randomHash = UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+            String randomHash = UUID.randomUUID().toString().replace("-", "").substring(0, 10).toUpperCase();
             this.accessCode = "#RLN-" + randomHash;
         }
     }

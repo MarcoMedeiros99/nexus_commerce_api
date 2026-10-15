@@ -20,7 +20,7 @@ public abstract class AbstractUser implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "access_code", nullable = false, unique = true, updatable = false, length = 15)
+    @Column(name = "access_code", nullable = false, unique = true, updatable = false, length = 20)
     private String accessCode;
 
     @Column(nullable = false)
@@ -48,7 +48,7 @@ public abstract class AbstractUser implements Serializable {
     @PrePersist
     protected void generateAccessCode() {
         if (accessCode == null) {
-            String randomHash = UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+            String randomHash = UUID.randomUUID().toString().replace("-", "").substring(0, 10).toUpperCase();
             this.accessCode = "#USR-" + randomHash;
         }
     }

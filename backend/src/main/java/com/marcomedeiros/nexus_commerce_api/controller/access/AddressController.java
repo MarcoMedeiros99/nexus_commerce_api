@@ -46,20 +46,20 @@ public class AddressController {
         return ResponseEntity.ok().body(address);
     }
 
-    // Endpoint para buscar o endereço por id do usuario
-    @GetMapping("/user/{idUser}")
-    public ResponseEntity<List<AddressResponseDTO>> findAddressByIdUser(@PathVariable Long idUser) {
-        List<AddressResponseDTO> addresses = service.findAddressByIdUser(idUser);
+    // Endpoint para buscar os endereços pelo accessCode do usuario
+    @GetMapping("/find/user/{accessCode}")
+    public ResponseEntity<List<AddressResponseDTO>> findAddressByUserAccessCode(@PathVariable String accessCode) {
+        List<AddressResponseDTO> addresses = service.findAddressByUserAccessCode(accessCode);
         return ResponseEntity.ok().body(addresses);
     }
 
     // Metodo POST
 
-    // Endpoint para inserir um endereço no banco
-    @PostMapping("/user/{idUser}")
-    public ResponseEntity<AddressResponseDTO> insertAddress(@PathVariable Long idUser,
+    // Endpoint para inserir um endereço pelo accessCode do usuario
+    @PostMapping("/insert/user/{accessCode}")
+    public ResponseEntity<AddressResponseDTO> insertAddress(@PathVariable String accessCode,
             @RequestBody @Valid AddressRequestDTO addressDTO) {
-        AddressResponseDTO response = service.insertAddress(idUser, addressDTO);
+        AddressResponseDTO response = service.insertAddress(accessCode, addressDTO);
         return ResponseEntity.ok().body(response);
     }
 

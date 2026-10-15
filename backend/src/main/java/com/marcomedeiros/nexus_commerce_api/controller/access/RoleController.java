@@ -28,10 +28,10 @@ public class RoleController {
 
     // Metodos GET
 
-    // Endpoit para buscar uma role pelo id
-    @GetMapping(value = "/find/{id}")
-    public ResponseEntity<RoleResponseDTO> findRoleById(@PathVariable Long id) {
-        RoleResponseDTO role = service.findRoleById(id);
+    // Endpoint para buscar uma role pelo access code (identificador público)
+    @GetMapping(value = "/{accessCode}")
+    public ResponseEntity<RoleResponseDTO> findRoleByCode(@PathVariable String accessCode) {
+        RoleResponseDTO role = service.findRoleByCode(accessCode);
         return ResponseEntity.ok().body(role);
     }
 
@@ -42,38 +42,31 @@ public class RoleController {
         return ResponseEntity.ok().body(listRole);
     }
 
-    // Endpoint para buscar uma role pelo código de acesso
-    @GetMapping(value = "/code/{accessCode}")
-    public ResponseEntity<RoleResponseDTO> findRoleByCode(@PathVariable String accessCode) {
-        RoleResponseDTO role = service.findRoleByCode(accessCode);
-        return ResponseEntity.ok().body(role);
-    }
-
     // Metodos POST
 
     // Endpoint para inserir uma role
     @PostMapping(value = "/insert")
     public ResponseEntity<RoleResponseDTO> insertRole(@RequestBody RoleRequestDTO dto) {
-        RoleResponseDTO role = service.insertRole(null, dto);
+        RoleResponseDTO role = service.insertRole(dto);
         return ResponseEntity.ok().body(role);
     }
 
     // Metodo PUT
 
-    // Endpoint para atualizar uma role pelo id
-    @PutMapping(value = "/update/{id}")
-    public ResponseEntity<RoleResponseDTO> updateRole(@PathVariable Long id,
+    // Endpoint para atualizar uma role
+    @PutMapping(value = "/update/{accessCode}")
+    public ResponseEntity<RoleResponseDTO> updateRole(@PathVariable String accessCode,
             @RequestBody @Valid RoleRequestDTO dto) {
-        RoleResponseDTO response = service.updateRole(id, dto);
+        RoleResponseDTO response = service.updateRole(accessCode, dto);
         return ResponseEntity.ok().body(response);
     }
 
     // Metodo DELETE
 
-    // Endpoint para deletar uma role por id
-    @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<Void> deleteRole(@PathVariable Long id) {
-        service.deleteRole(id);
+    // Endpoint para deletar uma role
+    @DeleteMapping(value = "/delete/{accessCode}")
+    public ResponseEntity<Void> deleteRole(@PathVariable String accessCode) {
+        service.deleteRole(accessCode);
         return ResponseEntity.noContent().build();
     }
 }

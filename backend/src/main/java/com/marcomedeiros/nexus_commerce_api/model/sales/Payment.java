@@ -25,7 +25,7 @@ public class Payment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPayment;
-    @Column(name = "access_code", nullable = false, unique = true, updatable = false, length = 15)
+    @Column(name = "access_code", nullable = false, unique = true, updatable = false, length = 20)
     private String accessCode;
     @Convert(converter = PaymentMethodConverter.class)
     @Column(name = "payment_method", nullable = false)
@@ -40,7 +40,7 @@ public class Payment implements Serializable{
     @PrePersist
     private void generateAccessCode() {
         if (this.accessCode == null) {
-            String randomHash = UUID.randomUUID().toString().substring(0, 6).toUpperCase();
+            String randomHash = UUID.randomUUID().toString().replace("-", "").substring(0, 10).toUpperCase();
             this.accessCode = "#PAY-" + randomHash;
         }
         if (this.paymentDateTime == null) {

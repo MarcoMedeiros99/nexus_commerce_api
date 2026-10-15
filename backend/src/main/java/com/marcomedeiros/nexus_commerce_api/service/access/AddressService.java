@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.marcomedeiros.nexus_commerce_api.util.AccessCodeUtils;
 import com.marcomedeiros.nexus_commerce_api.controller.Exceptions.DatabaseException;
 import com.marcomedeiros.nexus_commerce_api.controller.Exceptions.ResourceNotFoundException;
 import com.marcomedeiros.nexus_commerce_api.dto.access.AddressRequestDTO;
@@ -41,11 +42,12 @@ public class AddressService {
         return new AddressResponseDTO(address);
     }
 
-    // Metodo para buscar um endereço pelo id do usuario
-    public List<AddressResponseDTO> findAddressByIdUser(Long idUser) {
-        userRepository.findById(idUser)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + idUser));
-        return repository.findByUserIdUser(idUser)
+    // Metodo para buscar os endereços pelo accessCode do usuario
+    public List<AddressResponseDTO> findAddressByUserAccessCode(String accessCode) {
+        String formattedCode = AccessCodeUtils.formatUserAccessCode(accessCode);
+        userRepository.findByAccessCode(formattedCode)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with access code: " + formattedCode));
+        return repository.findByUserAccessCode(formattedCode)
                 .stream()
                 .map(AddressResponseDTO::new)
                 .toList();
@@ -53,13 +55,14 @@ public class AddressService {
 
     // Metodo POST
 
-    // Metodo para inserir um endereço
-    public AddressResponseDTO insertAddress(Long idUser, AddressRequestDTO dto) {
-        User user = userRepository.findById(idUser)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + idUser));
+    // Metodo para inserir um endereço pelo accessCode do usuario
+    public AddressResponseDTO insertAddress(String accessCode, AddressRequestDTO dto) {
+        String formattedCode = AccessCodeUtils.formatUserAccessCode(accessCode);
+        User user = userRepository.findByAccessCode(formattedCode)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with access code: " + formattedCode));
 
-        boolean addressExists = repository.existsByUserIdUserAndZipCodeAndNumber(
-                idUser, dto.zipCode(), dto.number());
+        boolean addressExists = repository.existsByUserAccessCodeAndZipCodeAndNumber(
+                formattedCode, dto.zipCode(), dto.number());
         if (addressExists) {
             throw new DatabaseException("Address with zipCode: " + dto.zipCode()
                     + " and number: " + dto.number() + " already exists for this user.");

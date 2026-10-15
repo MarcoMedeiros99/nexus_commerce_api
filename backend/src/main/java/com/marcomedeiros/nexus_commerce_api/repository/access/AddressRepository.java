@@ -9,9 +9,10 @@ import java.util.Optional;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
-    List<Address> findByUserIdUser(Long idUser);
+
+    List<Address> findByUserAccessCode(String accessCode);
 
     Optional<Address> findByZipCode(String zipCode);
 
-    boolean existsByUserIdUserAndZipCodeAndNumber(Long idUser, String zipCode, String number);
+    boolean existsByUserAccessCodeAndZipCodeAndNumber(String accessCode, String zipCode, String number);
 }

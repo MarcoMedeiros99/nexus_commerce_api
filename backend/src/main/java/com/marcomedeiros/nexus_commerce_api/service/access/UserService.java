@@ -30,11 +30,10 @@ public class UserService {
 
     // Metodos GET
 
-    // Metodo para buscar um user pelo id
-    public UserResponseDTO findById(Long id) {
-        User user = repository.findById(id)
+    // Metodo interno: busca um user pelo id (uso interno / Spring Security)
+    public User findUserEntityById(Long id) {
+        return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
-        return new UserResponseDTO(user);
     }
 
     // Metodo para buscar um user pelo email
@@ -44,7 +43,7 @@ public class UserService {
         return new UserResponseDTO(user);
     }
 
-    // Metodo para buscar um user pelo access code
+    // Metodo para buscar um user pelo access code (identificador público)
     public UserResponseDTO findByAccessCode(String accessCode) {
         String formattedCode = AccessCodeUtils.formatUserAccessCode(accessCode);
         User user = repository.findByAccessCode(formattedCode)
@@ -115,27 +114,29 @@ public class UserService {
 
     // Metodos PUT
 
-    // Metodo para atualizar o nome de um user
-    public UserResponseDTO updateName(Long id, String name) {
+    // Metodo para atualizar o nome
+    public UserResponseDTO updateName(String accessCode, String name) {
         if (name == null || name.isBlank()) {
             throw new DatabaseException("Name cannot be empty.");
         }
-        User user = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        String formattedCode = AccessCodeUtils.formatUserAccessCode(accessCode);
+        User user = repository.findByAccessCode(formattedCode)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with access code: " + formattedCode));
 
         user.setName(cleanString(name));
         User savedUser = repository.save(user);
         return new UserResponseDTO(savedUser);
     }
 
-    // Metodo para atualizar o email de um user
-    public UserResponseDTO updateEmail(Long id, String email) {
+    // Metodo para atualizar o email
+    public UserResponseDTO updateEmail(String accessCode, String email) {
         if (email == null || email.isBlank()) {
             throw new DatabaseException("Email cannot be empty.");
         }
+        String formattedCode = AccessCodeUtils.formatUserAccessCode(accessCode);
         String cleanedEmail = cleanString(email);
-        User user = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        User user = repository.findByAccessCode(formattedCode)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with access code: " + formattedCode));
 
         if (!user.getEmail().equalsIgnoreCase(cleanedEmail) && repository.existsByEmail(cleanedEmail)) {
             throw new DatabaseException("Email already registered: " + cleanedEmail);
@@ -146,27 +147,29 @@ public class UserService {
         return new UserResponseDTO(savedUser);
     }
 
-    // Metodo para atualizar o telefone de um user
-    public UserResponseDTO updatePhone(Long id, String phone) {
+    // Metodo para atualizar o telefone
+    public UserResponseDTO updatePhone(String accessCode, String phone) {
         if (phone == null || phone.isBlank()) {
             throw new DatabaseException("Phone cannot be empty.");
         }
-        User user = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        String formattedCode = AccessCodeUtils.formatUserAccessCode(accessCode);
+        User user = repository.findByAccessCode(formattedCode)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with access code: " + formattedCode));
 
         user.setPhone(cleanString(phone));
         User savedUser = repository.save(user);
         return new UserResponseDTO(savedUser);
     }
 
-    // Metodo para atualizar a senha de um user
-    public UserResponseDTO updatePassword(Long id, String password) {
+    // Metodo para atualizar a senha
+    public UserResponseDTO updatePassword(String accessCode, String password) {
         if (password == null || password.isBlank()) {
             throw new DatabaseException("Password cannot be empty.");
         }
+        String formattedCode = AccessCodeUtils.formatUserAccessCode(accessCode);
         String cleanedPassword = cleanString(password);
-        User user = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        User user = repository.findByAccessCode(formattedCode)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with access code: " + formattedCode));
 
         String hashedPassword = passwordService.validateAndEncodeForUpdate(
                 cleanedPassword, user.getName(), user.getPassword(), user.getIdUser());
@@ -180,7 +183,8 @@ public class UserService {
     }
 
     private String cleanString(String value) {
-        if (value == null) return null;
+        if (value == null)
+            return null;
         String trimmed = value.trim();
         if (trimmed.startsWith("\"") && trimmed.endsWith("\"") && trimmed.length() >= 2) {
             return trimmed.substring(1, trimmed.length() - 1);

@@ -6,9 +6,30 @@ public class AccessCodeUtils {
     private AccessCodeUtils() {
     }
 
-    // Metodo para formatar o access code de User (aceita com/sem # e com/sem hífen)
+    // Formatação dos access codes por entidade
+
     public static String formatUserAccessCode(String accessCode) {
         return formatAccessCode(accessCode, "USR");
+    }
+
+    public static String formatRoleAccessCode(String accessCode) {
+        return formatAccessCode(accessCode, "RLN");
+    }
+
+    public static String formatCategoryAccessCode(String accessCode) {
+        return formatAccessCode(accessCode, "CAT");
+    }
+
+    public static String formatProductAccessCode(String accessCode) {
+        return formatAccessCode(accessCode, "PROD");
+    }
+
+    public static String formatOrderAccessCode(String accessCode) {
+        return formatAccessCode(accessCode, "ORD");
+    }
+
+    public static String formatPaymentAccessCode(String accessCode) {
+        return formatAccessCode(accessCode, "PAY");
     }
 
     // Metodo genérico para formatar qualquer access code pelo prefixo

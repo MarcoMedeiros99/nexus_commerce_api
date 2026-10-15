@@ -5,7 +5,7 @@ import com.marcomedeiros.nexus_commerce_api.model.access.Address;
 public record AddressResponseDTO(
 
         Long idAddress,
-        String streetAddress,
+        String street,
         String number,
         String city,
         String state,

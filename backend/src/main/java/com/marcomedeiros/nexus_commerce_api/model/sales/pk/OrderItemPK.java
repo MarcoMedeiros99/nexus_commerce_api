@@ -7,13 +7,15 @@ import lombok.*;
 
 import java.io.Serial;
 import java.io.Serializable;
-@Embeddable // Indica que esta classe Ã© um "pedaÃ§o" de outra
+@Embeddable // Indica que esta classe é um "pedaço" de outra
 @Getter
 @Setter
 @EqualsAndHashCode
-@NoArgsConstructor
 @AllArgsConstructor
 public class OrderItemPK implements Serializable {
+    public OrderItemPK() {
+    }
+
     @Serial
     private static final long serialVersionUID = 1L;
     @ManyToOne

@@ -1,7 +1,8 @@
-package com.marcomedeiros.nexus_commerce_api.controller.access;
+package com.marcomedeiros.nexus_commerce_api.controller.access.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.marcomedeiros.nexus_commerce_api.dto.access.users.UserRequestDTO;
 import com.marcomedeiros.nexus_commerce_api.dto.access.users.UserResponseDTO;
-import com.marcomedeiros.nexus_commerce_api.service.access.UserService;
+import com.marcomedeiros.nexus_commerce_api.service.access.users.UserService;
 
 import jakarta.validation.Valid;
 
@@ -25,7 +26,7 @@ public class UserController {
 
     // Metodos GET
 
-    // Metodo para buscar um user pelo access code (identificador público)
+    // Metodo para buscar um user pelo access code
     @GetMapping(value = "/{accessCode}")
     public ResponseEntity<UserResponseDTO> findByAccessCode(@PathVariable String accessCode) {
         UserResponseDTO response = service.findByAccessCode(accessCode);
@@ -39,9 +40,12 @@ public class UserController {
         return ResponseEntity.ok().body(response);
     }
 
-    // Metodo para buscar um user pelo CPF ou CNPJ (documento)
-    @GetMapping(value = "/document/{document}")
+    // Metodo para buscar um user pelo CPF ou CNPJ via path variable (suporta barras no CNPJ)
+    @GetMapping(value = "/document/{*document}")
     public ResponseEntity<UserResponseDTO> findByDocument(@PathVariable String document) {
+        if (document != null && document.startsWith("/")) {
+            document = document.substring(1);
+        }
         UserResponseDTO response = service.findByDocument(document);
         return ResponseEntity.ok().body(response);
     }
@@ -57,32 +61,42 @@ public class UserController {
 
     // Metodos PUT
 
-    // Endpoint para atualizar o nome de um user via accessCode
+    // Endpoint para atualizar o nome de um user
     @PutMapping(value = "/update/name/{accessCode}")
     public ResponseEntity<UserResponseDTO> updateName(@PathVariable String accessCode, @RequestBody String name) {
         UserResponseDTO response = service.updateName(accessCode, name);
         return ResponseEntity.ok().body(response);
     }
 
-    // Endpoint para atualizar o email de um user via accessCode
+    // Endpoint para atualizar o email de um user
     @PutMapping(value = "/update/email/{accessCode}")
     public ResponseEntity<UserResponseDTO> updateEmail(@PathVariable String accessCode, @RequestBody String email) {
         UserResponseDTO response = service.updateEmail(accessCode, email);
         return ResponseEntity.ok().body(response);
     }
 
-    // Endpoint para atualizar o telefone de um user via accessCode
+    // Endpoint para atualizar o telefone de um user
     @PutMapping(value = "/update/phone/{accessCode}")
     public ResponseEntity<UserResponseDTO> updatePhone(@PathVariable String accessCode, @RequestBody String phone) {
         UserResponseDTO response = service.updatePhone(accessCode, phone);
         return ResponseEntity.ok().body(response);
     }
 
-    // Endpoint para atualizar a senha de um user via accessCode
+    // Endpoint para atualizar a senha de um user
     @PutMapping(value = "/update/password/{accessCode}")
     public ResponseEntity<UserResponseDTO> updatePassword(@PathVariable String accessCode,
             @RequestBody String password) {
         UserResponseDTO response = service.updatePassword(accessCode, password);
         return ResponseEntity.ok().body(response);
     }
+
+    // Metodo DELETE
+
+    // Endpoint para deletar um user
+    @DeleteMapping(value = "/delete/{accessCode}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String accessCode) {
+        service.deleteUser(accessCode);
+        return ResponseEntity.noContent().build();
+    }
+
 }

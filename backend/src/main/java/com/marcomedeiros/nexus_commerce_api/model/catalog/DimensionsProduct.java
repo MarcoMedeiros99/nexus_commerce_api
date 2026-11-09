@@ -7,10 +7,12 @@ import lombok.*;
 @Embeddable
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class DimensionsProduct {
+    public DimensionsProduct() {
+    }
+
     @PositiveOrZero
     @Column(nullable = false)
     private Double weight;

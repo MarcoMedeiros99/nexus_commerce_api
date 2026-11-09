@@ -10,13 +10,16 @@ import java.time.LocalDateTime;
 @Table(name = "tb_coupon")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Coupon implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public Coupon() {
+    }
+
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

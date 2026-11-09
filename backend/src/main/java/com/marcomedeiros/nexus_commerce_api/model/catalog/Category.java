@@ -13,13 +13,16 @@ import java.util.UUID;
 @Table(name = "tb_category")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Category implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public Category() {
+    }
+
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

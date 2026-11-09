@@ -16,13 +16,16 @@ import java.math.BigDecimal;
 @Table(name = "tb_order_item")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class OrderItem implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public OrderItem() {
+    }
+
     @Builder.Default
     @EmbeddedId // fala que o ID Ã© classe composta OrderItemPK
     @EqualsAndHashCode.Include

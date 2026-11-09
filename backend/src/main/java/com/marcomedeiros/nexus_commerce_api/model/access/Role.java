@@ -11,13 +11,16 @@ import java.util.UUID;
 @Table(name = "tb_role")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Role implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public Role() {
+    }
+
 
     @EqualsAndHashCode.Include
     @Id

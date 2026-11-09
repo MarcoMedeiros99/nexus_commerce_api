@@ -6,10 +6,12 @@ import lombok.*;
 @Table(name = "tb_review_photo")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ReviewPhoto {
+    public ReviewPhoto() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPhoto;

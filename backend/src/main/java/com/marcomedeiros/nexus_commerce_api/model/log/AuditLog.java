@@ -11,10 +11,12 @@ import java.time.LocalDateTime;
 @Table(name = "tb_audit_log")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class AuditLog {
+    public AuditLog() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idLog;

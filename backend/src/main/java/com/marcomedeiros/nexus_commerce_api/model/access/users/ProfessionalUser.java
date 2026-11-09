@@ -10,10 +10,13 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "tb_professional_user")
 @Getter
 @Setter
-@NoArgsConstructor
 @SuperBuilder
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class ProfessionalUser extends AbstractUser {
+
+    public ProfessionalUser() {
+        super();
+    }
 
     @EqualsAndHashCode.Include
     @Id
@@ -25,7 +28,7 @@ public class ProfessionalUser extends AbstractUser {
     protected void generateAccessCode() {
         if (getAccessCode() == null) {
             String randomHash = UUID.randomUUID().toString().substring(0, 6).toUpperCase();
-            setAccessCode("#" + (getRole() != null ? getRole().toString() : "PRO") + "-" + randomHash);
+            setAccessCode("#" + (getRole() != null ? getRole().getNameRole() : "PRO") + "-" + randomHash);
         }
     }
 }

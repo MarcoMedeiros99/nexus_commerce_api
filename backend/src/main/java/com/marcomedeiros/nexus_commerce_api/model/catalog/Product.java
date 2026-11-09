@@ -15,13 +15,16 @@ import java.util.UUID;
 @Table(name = "tb_product")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Product implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public Product() {
+    }
+
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

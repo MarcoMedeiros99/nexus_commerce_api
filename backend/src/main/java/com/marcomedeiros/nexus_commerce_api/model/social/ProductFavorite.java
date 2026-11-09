@@ -12,11 +12,13 @@ import java.time.LocalDateTime;
         @UniqueConstraint(columnNames = { "id_user", "id_product" }) })
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ProductFavorite {
+    public ProductFavorite() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFavorite;

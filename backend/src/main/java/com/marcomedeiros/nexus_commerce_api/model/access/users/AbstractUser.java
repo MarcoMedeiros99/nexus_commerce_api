@@ -13,12 +13,14 @@ import java.util.UUID;
 @MappedSuperclass
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 public abstract class AbstractUser implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public AbstractUser() {
+    }
 
     @Column(name = "access_code", nullable = false, unique = true, updatable = false, length = 20)
     private String accessCode;

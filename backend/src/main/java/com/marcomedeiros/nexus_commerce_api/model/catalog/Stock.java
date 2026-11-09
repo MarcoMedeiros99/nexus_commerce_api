@@ -11,13 +11,16 @@ import java.math.BigDecimal;
 @Table(name = "tb_stock")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Stock implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public Stock() {
+    }
+
     @EqualsAndHashCode.Include
     @Id
     private Long idProduct;

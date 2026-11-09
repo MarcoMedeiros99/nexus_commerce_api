@@ -32,6 +32,17 @@ public class AccessCodeUtils {
         return formatAccessCode(accessCode, "PAY");
     }
 
+    public static String formatProfessionalUserAccessCode(String accessCode) {
+        if (accessCode == null || accessCode.isBlank()) {
+            return accessCode;
+        }
+        String code = accessCode.trim().toUpperCase();
+        if (!code.startsWith("#")) {
+            code = "#" + code;
+        }
+        return code;
+    }
+
     // Metodo genérico para formatar qualquer access code pelo prefixo
     public static String formatAccessCode(String accessCode, String prefix) {
         if (accessCode == null || accessCode.isBlank()) {

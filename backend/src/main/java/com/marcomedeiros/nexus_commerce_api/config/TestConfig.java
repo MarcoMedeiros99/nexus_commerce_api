@@ -3,6 +3,7 @@ package com.marcomedeiros.nexus_commerce_api.config;
 import com.marcomedeiros.nexus_commerce_api.model.access.Address;
 import com.marcomedeiros.nexus_commerce_api.model.access.Role;
 import com.marcomedeiros.nexus_commerce_api.model.access.enums.TypePerson;
+import com.marcomedeiros.nexus_commerce_api.model.access.users.ProfessionalUser;
 import com.marcomedeiros.nexus_commerce_api.model.access.users.User;
 import com.marcomedeiros.nexus_commerce_api.model.catalog.Category;
 import com.marcomedeiros.nexus_commerce_api.model.catalog.DimensionsProduct;
@@ -12,7 +13,8 @@ import com.marcomedeiros.nexus_commerce_api.model.sales.Order;
 import com.marcomedeiros.nexus_commerce_api.model.sales.OrderItem;
 import com.marcomedeiros.nexus_commerce_api.model.sales.enums.OrderStatus;
 import com.marcomedeiros.nexus_commerce_api.repository.access.RoleRepository;
-import com.marcomedeiros.nexus_commerce_api.repository.access.UserRepository;
+import com.marcomedeiros.nexus_commerce_api.repository.access.users.ProfessionalUserRepository;
+import com.marcomedeiros.nexus_commerce_api.repository.access.users.UserRepository;
 import com.marcomedeiros.nexus_commerce_api.repository.catalog.CategoryRepository;
 import com.marcomedeiros.nexus_commerce_api.repository.catalog.ProductRepository;
 import com.marcomedeiros.nexus_commerce_api.repository.catalog.StockRepository;
@@ -36,6 +38,9 @@ public class TestConfig implements CommandLineRunner {
         private UserRepository userRepository;
 
         @Autowired
+        private ProfessionalUserRepository professionalUserRepository;
+
+        @Autowired
         private ProductRepository productRepository;
 
         @Autowired
@@ -50,9 +55,16 @@ public class TestConfig implements CommandLineRunner {
         @Override
         public void run(String... args) throws Exception {
 
+                // Roles
+
                 Role r1 = Role.builder().nameRole("ADMIN").build();
                 Role r2 = Role.builder().nameRole("CLIENT").build();
-                roleRepository.saveAll(Arrays.asList(r1, r2));
+                Role r3 = Role.builder().nameRole("SELLER").build();
+                Role r4 = Role.builder().nameRole("MANAGER").build();
+                Role r5 = Role.builder().nameRole("SUPPORT").build();
+                roleRepository.saveAll(Arrays.asList(r1, r2, r3, r4, r5));
+
+                // Users
 
                 User u1 = User.builder()
                                 .name("Majin Kodak")
@@ -60,7 +72,7 @@ public class TestConfig implements CommandLineRunner {
                                 .password("321741369")
                                 .document("142.153.316-25")
                                 .phone("(31)99999-9999")
-                                .role(r1)
+                                .role(r2)
                                 .typePerson(TypePerson.INDIVIDUAL)
                                 .build();
 
@@ -101,6 +113,52 @@ public class TestConfig implements CommandLineRunner {
                 u2.getAddresses().add(ad3);
                 userRepository.saveAll(Arrays.asList(u1, u2));
 
+                // Professional Users
+
+                ProfessionalUser pu1 = ProfessionalUser.builder()
+                                .name("Carlos Vendedor")
+                                .email("carlos.vendedor@nexus.com")
+                                .password("789456123")
+                                .document("528.143.697-09")
+                                .phone("(31)97777-7777")
+                                .role(r3)
+                                .typePerson(TypePerson.INDIVIDUAL)
+                                .build();
+
+                ProfessionalUser pu2 = ProfessionalUser.builder()
+                                .name("Ana Gerente")
+                                .email("ana.gerente@nexus.com")
+                                .password("456789123")
+                                .document("364.218.759-55")
+                                .phone("(31)96666-6666")
+                                .role(r4)
+                                .typePerson(TypePerson.INDIVIDUAL)
+                                .build();
+
+                ProfessionalUser pu3 = ProfessionalUser.builder()
+                                .name("Roberto Suporte")
+                                .email("roberto.suporte@nexus.com")
+                                .password("159753468")
+                                .document("891.456.237-91")
+                                .phone("(31)95555-5555")
+                                .role(r5)
+                                .typePerson(TypePerson.INDIVIDUAL)
+                                .build();
+
+                ProfessionalUser pu4 = ProfessionalUser.builder()
+                                .name("Tech Solutions LTDA")
+                                .email("contato@techsolutions.com")
+                                .password("741852963")
+                                .document("45.678.901/0001-75")
+                                .phone("(31)94444-4444")
+                                .role(r3)
+                                .typePerson(TypePerson.CORPORATE)
+                                .build();
+
+                professionalUserRepository.saveAll(Arrays.asList(pu1, pu2, pu3, pu4));
+
+                // Categories
+
                 Category celular = Category.builder()
                                 .name("Celular")
                                 .build();
@@ -111,6 +169,7 @@ public class TestConfig implements CommandLineRunner {
 
                 categoryRepository.saveAll(Arrays.asList(celular, eletronicos));
 
+                // Products
                 Product prod1 = Product.builder()
                                 .name("Iphone 10")
                                 .description("Celular da ipple")
@@ -120,10 +179,10 @@ public class TestConfig implements CommandLineRunner {
 
                 Product prod2 = Product.builder()
                                 .name("Smart TV 65\" TCL 4K")
-                                .description("A Smart TV TCL 65P7K de 65\" oferece uma experiÃªncia visual. " +
-                                                "Ela combina tecnologia com recursos, elevando o entretenimento domÃ©stico. "
+                                .description("A Smart TV TCL 65P7K de 65\" oferece uma experiência visual. " +
+                                                "Ela combina tecnologia com recursos, elevando o entretenimento doméstico. "
                                                 +
-                                                "Com a resoluÃ§Ã£o 4K UHD")
+                                                "Com a resolução 4K UHD")
                                 .price(new java.math.BigDecimal("2300.00"))
                                 .dimensionsProduct(new DimensionsProduct(21.2, 144.5, 14.3, 89.3))
                                 .build();
@@ -133,6 +192,8 @@ public class TestConfig implements CommandLineRunner {
                 prod2.getCategories().add(eletronicos);
 
                 productRepository.saveAll(Arrays.asList(prod1, prod2));
+
+                // Stock
 
                 Stock stock1 = Stock.builder()
                                 .product(prod1)
@@ -149,6 +210,8 @@ public class TestConfig implements CommandLineRunner {
                                 .build();
 
                 stockRepository.saveAll(Arrays.asList(stock1, stock2));
+
+                // Orders
 
                 Order ord1 = Order.builder()
                                 .user(u1)

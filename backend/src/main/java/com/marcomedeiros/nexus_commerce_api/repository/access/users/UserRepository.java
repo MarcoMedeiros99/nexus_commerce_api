@@ -1,4 +1,4 @@
-package com.marcomedeiros.nexus_commerce_api.repository.access;
+package com.marcomedeiros.nexus_commerce_api.repository.access.users;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

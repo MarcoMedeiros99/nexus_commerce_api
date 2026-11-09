@@ -14,7 +14,7 @@ import com.marcomedeiros.nexus_commerce_api.dto.access.AddressResponseDTO;
 import com.marcomedeiros.nexus_commerce_api.model.access.Address;
 import com.marcomedeiros.nexus_commerce_api.model.access.users.User;
 import com.marcomedeiros.nexus_commerce_api.repository.access.AddressRepository;
-import com.marcomedeiros.nexus_commerce_api.repository.access.UserRepository;
+import com.marcomedeiros.nexus_commerce_api.repository.access.users.UserRepository;
 
 @Service
 public class AddressService {

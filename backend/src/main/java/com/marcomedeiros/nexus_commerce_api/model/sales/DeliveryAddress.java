@@ -12,12 +12,15 @@ import java.io.Serializable;
 @Embeddable
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class DeliveryAddress implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public DeliveryAddress() {
+    }
+
     @NotBlank
     @Column(name = "delivery_street_address", nullable = false, length = 150)
     private String streetAddress;

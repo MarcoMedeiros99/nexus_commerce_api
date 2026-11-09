@@ -15,7 +15,6 @@ import java.util.*;
 @Table(name = "tb_order")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -23,6 +22,10 @@ public class Order implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public Order() {
+    }
+
 
     @EqualsAndHashCode.Include
     @Id

@@ -14,13 +14,16 @@ import java.util.UUID;
 @Table(name = "tb_payment")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Payment implements Serializable{
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public Payment() {
+    }
+
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

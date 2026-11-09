@@ -12,7 +12,6 @@ import com.marcomedeiros.nexus_commerce_api.model.access.users.User;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Table(name = "tb_password_history")
@@ -20,6 +19,10 @@ public class PasswordHistory implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public PasswordHistory() {
+    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

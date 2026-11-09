@@ -16,7 +16,6 @@ import java.io.Serializable;
 @Table(name = "tb_address")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -24,6 +23,9 @@ public class Address implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
+
+    public Address() {
+    }
 
     @EqualsAndHashCode.Include
     @Id
@@ -48,7 +50,7 @@ public class Address implements Serializable {
     private String state;
 
     @NotBlank
-    String neighborhood;
+    private String neighborhood;
     @Pattern(regexp = "\\d{5}-\\d{3}")
     @Column(nullable = false)
     private String zipCode; // CEP

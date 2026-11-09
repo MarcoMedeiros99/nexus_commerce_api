@@ -15,10 +15,12 @@ import java.util.List;
 @Table(name = "tb_product_review")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ProductReview {
+
+    public ProductReview() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
